@@ -1,58 +1,94 @@
-// =====================================
-// SALIM BENMOKHTAR PORTFOLIO
-// JavaScript Interactivity & Features
-// =====================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    initMobileMenu();
-    initPortfolioFilters();
-    initScrollAnimations();
-    initParallax();
-    initFormSubmission();
+// Smooth Scroll Behavior
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
 });
 
-// ========== MOBILE MENU ==========
-function initMobileMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
+// Mobile Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
 
-    if (!hamburger) return;
-
-    hamburger.addEventListener('click', function() {
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
         navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
     });
 
-    // Close menu when clicking on a link
+    // Close menu when link is clicked
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
         });
     });
 }
 
-// ========== PORTFOLIO FILTERS ==========
-function initPortfolioFilters() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
+// Parallax Effect
+window.addEventListener('scroll', () => {
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    parallaxElements.forEach(element => {
+        const scrollPosition = window.pageYOffset;
+        const parallaxValue = element.getAttribute('data-parallax');
+        element.style.transform = `translateY(${scrollPosition * parallaxValue}px)`;
+    });
+});
 
+// Intersection Observer for Animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-up');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.fade-up').forEach(element => {
+    observer.observe(element);
+});
+
+// Portfolio Filtering
+const filterBtns = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+if (filterBtns.length > 0) {
     filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Update active button
+        btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+            btn.classList.add('active');
 
-            // Filter items
-            const filter = this.getAttribute('data-filter');
+            const filter = btn.getAttribute('data-filter');
+
             portfolioItems.forEach(item => {
                 if (filter === 'all') {
                     item.style.display = 'block';
-                    item.classList.add('fade-up');
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                    }, 10);
                 } else {
                     if (item.getAttribute('data-category') === filter) {
                         item.style.display = 'block';
-                        item.classList.add('fade-up');
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                        }, 10);
                     } else {
-                        item.style.display = 'none';
+                        item.style.opacity = '0';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
                     }
                 }
             });
@@ -60,160 +96,137 @@ function initPortfolioFilters() {
     });
 }
 
-// ========== SCROLL ANIMATIONS ==========
-function initScrollAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-up');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
+// Navbar Scroll Effect
+let lastScrollTop = 0;
+const navbar = document.querySelector('.navbar');
 
-    // Observe all animatable elements
-    document.querySelectorAll('.fade-up, .service-card, .about-block').forEach(el => {
-        observer.observe(el);
-    });
-}
+window.addEventListener('scroll', () => {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-// ========== PARALLAX EFFECT ==========
-function initParallax() {
-    window.addEventListener('scroll', function() {
-        const parallaxElements = document.querySelectorAll('[data-parallax]');
-        
-        parallaxElements.forEach(element => {
-            const scrollPosition = window.pageYOffset;
-            const parallaxValue = element.getAttribute('data-parallax');
-            element.style.transform = `translateY(${scrollPosition * parallaxValue}px)`;
-        });
-    });
-}
+    if (scrollTop > 100) {
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+    } else {
+        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+    }
 
-// ========== FORM SUBMISSION ==========
-function initFormSubmission() {
-    const contactForm = document.querySelector('.contact-form');
-    
-    if (!contactForm) return;
-
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Get form data
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-        const message = this.querySelector('textarea').value;
-
-        // Validate
-        if (!name || !email || !message) {
-            alert('Please fill in all fields');
-            return;
-        }
-
-        // Here you would typically send data to a server
-        console.log('Form submitted:', { name, email, message });
-
-        // Show success message
-        alert('Thank you for your message! I\'ll get back to you soon.');
-        
-        // Reset form
-        this.reset();
-    });
-}
-
-// ========== SMOOTH SCROLLING ==========
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    });
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 });
 
-// ========== ACTIVE NAV LINK ON SCROLL ==========
-window.addEventListener('scroll', function() {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
+// Contact Form Handler
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = contactForm.querySelector('input[type="text"]').value;
+        const email = contactForm.querySelector('input[type="email"]').value;
+        const message = contactForm.querySelector('textarea').value;
 
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// ========== SKILL BAR ANIMATION ==========
-function animateSkillBars() {
-    const skillBars = document.querySelectorAll('.skill-progress');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const width = entry.target.style.width;
-                entry.target.style.width = '0';
-                setTimeout(() => {
-                    entry.target.style.width = width;
-                }, 100);
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-
-    skillBars.forEach(bar => observer.observe(bar));
-}
-
-// Call skill bar animation
-setTimeout(animateSkillBars, 500);
-
-// ========== SCROLL TO TOP BUTTON ==========
-function initScrollToTop() {
-    const scrollTop = document.querySelector('.scroll-top');
-    
-    if (!scrollTop) return;
-
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            scrollTop.style.display = 'block';
+        if (name && email && message) {
+            const mailtoLink = `mailto:selimbenmokhar@gmail.com?subject=Portfolio Inquiry from ${name}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            
+            window.location.href = mailtoLink;
+            contactForm.reset();
+            alert('Thank you for your message! Opening your default email client...');
         } else {
-            scrollTop.style.display = 'none';
+            alert('Please fill in all fields.');
+        }
+    });
+}
+
+// Scroll to Top Button
+const scrollTopBtn = document.querySelector('.scroll-top');
+if (scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.style.display = 'flex';
+        } else {
+            scrollTopBtn.style.display = 'none';
         }
     });
 
-    scrollTop.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 }
 
-initScrollToTop();
+// Add scroll-top button if it doesn't exist
+if (!scrollTopBtn) {
+    const button = document.createElement('button');
+    button.className = 'scroll-top';
+    button.innerHTML = '<i class="fas fa-chevron-up"></i>';
+    button.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #ff6b6b, #ff5252);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+        transition: all 0.3s ease;
+        display: none;
+    `;
+    
+    button.addEventListener('mouseenter', () => {
+        button.style.transform = 'translateY(-5px)';
+    });
+    
+    button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translateY(0)';
+    });
 
-// ========== PRELOAD IMAGES ==========
-function preloadImages() {
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        const src = img.src;
-        const preloadImg = new Image();
-        preloadImg.src = src;
+    document.body.appendChild(button);
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            button.style.display = 'flex';
+        } else {
+            button.style.display = 'none';
+        }
+    });
+
+    button.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 }
 
-preloadImages();
+// Add animation delays
+window.addEventListener('load', () => {
+    const fadeUpElements = document.querySelectorAll('.fade-up');
+    fadeUpElements.forEach((element, index) => {
+        element.style.animationDelay = `${index * 0.1}s`;
+    });
+});
 
-// ========== CONSOLE WELCOME MESSAGE ==========
-console.log('%c🎨 Salim Benmokhtar - Creative Portfolio', 'font-size: 20px; color: #ff6b6b; font-weight: bold;');
-console.log('%cBuilt with HTML, CSS & JavaScript', 'font-size: 14px; color: #4e54c8;');
-console.log('%cReady to impress! ✨', 'font-size: 14px; color: #00b894;');
+// Responsive text sizing
+function adjustTextSize() {
+    const width = window.innerWidth;
+    const root = document.documentElement;
+
+    if (width < 480) {
+        root.style.fontSize = '14px';
+    } else if (width < 768) {
+        root.style.fontSize = '15px';
+    } else {
+        root.style.fontSize = '16px';
+    }
+}
+
+window.addEventListener('resize', adjustTextSize);
+adjustTextSize();
+
+console.log('Portfolio website loaded successfully! 🎉');
