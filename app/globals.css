@@ -1035,17 +1035,20 @@ h1.display {
   border-color: var(--fg);
 }
 
+/* Cards grow to fill every row, so a filtered list never leaves a ragged hole. */
 .work-grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: clamp(1rem, 2vw, 1.75rem);
+  align-items: stretch;
 }
 
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
-  grid-column: span 4;
+  flex: 1 1 300px;
+  min-width: 0;
   border-radius: var(--r-lg);
   border: 1px solid var(--line);
   background: var(--surface);
@@ -1062,8 +1065,8 @@ h1.display {
   background: var(--surface-2);
 }
 
-.card--wide { grid-column: span 8; }
-.card--half { grid-column: span 6; }
+.card--wide { flex: 1 1 560px; }
+.card--half { flex: 1 1 420px; }
 
 .card__media {
   position: relative;
@@ -1199,12 +1202,12 @@ h1.display {
 }
 
 @media (max-width: 1024px) {
-  .card, .card--wide, .card--half { grid-column: span 6; }
+  .card, .card--wide, .card--half { flex: 1 1 calc(50% - 1rem); }
   .card--wide .card__media { aspect-ratio: 16 / 10; }
 }
 
 @media (max-width: 680px) {
-  .card, .card--wide, .card--half { grid-column: span 12; }
+  .card, .card--wide, .card--half { flex: 1 1 100%; }
 }
 
 /* ---------- bento capabilities ---------- */

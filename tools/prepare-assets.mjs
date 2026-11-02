@@ -113,7 +113,6 @@ const boards = [
   ['plateau-cercle-des-corbeaux.jpg', 'sablier/board-corbeaux.jpg', 'north'],
   ['plateau-navire-pirate.jpg', 'sablier/board-pirate.jpg', 'north'],
   ['plateau-desert-de-verre.jpg', 'sablier/board-desert.jpg', 'north'],
-  ['plateau-cimetiere-des-noms-effaces.jpg', 'sablier/board-cimetiere.jpg', 'north'],
 ];
 for (const [src, dest, gravity] of boards) convert(L(src), dest, { width: 1600, height: 1000, gravity });
 

@@ -52,7 +52,7 @@ export const T = {
   ],
   featured: {
     eyebrow: { en: 'Selected work', fr: 'Projets sélectionnés' },
-    title: { en: 'Eight projects, one', fr: 'Huit projets, une' },
+    title: { en: 'Seven projects, one', fr: 'Sept projets, une' },
     titleAccent: { en: 'standard', fr: 'exigence' },
     lead: {
       en: 'Platforms, games and campaigns — the design work and the build, documented rather than decorated.',
@@ -106,8 +106,8 @@ export const T = {
     title: { en: 'Everything, with the', fr: 'Tout, avec les' },
     titleAccent: { en: 'receipts', fr: 'preuves' },
     lead: {
-      en: 'Ten projects across platforms, games and brand campaigns. Each page documents the brief, the art direction, what was built and what it shipped on.',
-      fr: 'Dix projets entre plateformes, jeux et campagnes de marque. Chaque page documente le brief, la direction artistique, ce qui a été construit et sur quoi cela a été livré.',
+      en: 'Nine projects across platforms, games and brand campaigns. Each page documents the brief, the art direction, what was built and what it shipped on.',
+      fr: 'Neuf projets entre plateformes, jeux et campagnes de marque. Chaque page documente le brief, la direction artistique, ce qui a été construit et sur quoi cela a été livré.',
     },
     filterLabel: { en: 'Filter by discipline', fr: 'Filtrer par discipline' },
     count: { en: 'projects', fr: 'projets' },
@@ -136,8 +136,8 @@ export const T = {
     title: { en: 'Designer first. Then', fr: 'Designer d’abord. Puis' },
     titleAccent: { en: 'builder.', fr: 'bâtisseur.' },
     lead: {
-      en: 'I am Salim Benmokhtar, a graphic designer from Algiers. For ten years I have made brands, campaigns and printed matter. Six years ago I started building what I design — and that changed the work.',
-      fr: 'Je suis Salim Benmokhtar, graphiste algérois. Depuis dix ans, je fabrique des marques, des campagnes et de l’imprimé. Il y a six ans, j’ai commencé à construire ce que je dessine — et cela a changé le travail.',
+      en: 'I am Salim Benmokhtar, a graphic designer from Algiers. For ten years I have made brands, campaigns and printed matter. In 2024 I started building what I design — and that changed the work.',
+      fr: 'Je suis Salim Benmokhtar, graphiste algérois. Depuis dix ans, je fabrique des marques, des campagnes et de l’imprimé. En 2024, j’ai commencé à construire ce que je dessine — et cela a changé le travail.',
     },
     storyTitle: { en: 'The short version', fr: 'La version courte' },
     story: {

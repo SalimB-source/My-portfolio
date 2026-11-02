@@ -14,7 +14,7 @@ Vercel or any Node host.
 | Route | What it does |
 | --- | --- |
 | `/` | Hero, selected work (7 projects), capabilities, method, clients, principles, CTA |
-| `/work` | All 10 projects with a discipline filter |
+| `/work` | All 9 projects with a discipline filter |
 | `/work/[slug]` | Project case page: brief, approach, quote, gallery, at-a-glance facts, next project |
 | `/about` | Portrait, long-form story, timeline, tools, principles, contact |
 | `/cv` | One-page printable CV — the *Print / save as PDF* button produces a clean A4 |
@@ -61,7 +61,7 @@ index, the filter counts, the “next project” link, the CV's selected-work bl
 
 ## Images
 
-`public/images/` holds 52 optimised files (~8.7 MB) produced from the source
+`public/images/` holds 51 optimised files (~8.5 MB) produced from the source
 repositories by `tools/prepare-assets.mjs`:
 
 | Source repo | What it contributes |

@@ -158,7 +158,7 @@ export const PROJECTS: Project[] = [
       en: 'A story-driven card duel set in an Algerian fantasy world: 18 illustrated boards, 422 card artworks and a full in-game identity.',
       fr: 'Un duel de cartes narratif dans un univers fantasy algérien : 18 plateaux illustrés, 422 cartes et une identité de jeu complète.',
     },
-    stack: '422 card artworks · 18 boards',
+    stack: '422 cards · 18 boards',
     live: 'https://let-s-play-nu.vercel.app/jeu/sablier-de-bab-el',
     detail: {
       context: {
@@ -520,52 +520,6 @@ export const PROJECTS: Project[] = [
       gallery: [
         { src: '/images/work/abstract-light.jpg', caption: { en: 'Light and architecture', fr: 'Lumière et architecture' } },
         { src: '/images/work/editorial-motion.jpg', caption: { en: 'Editorial motion study', fr: 'Étude de mouvement éditorial' } },
-      ],
-    },
-  },
-  {
-    slug: 'emberwing',
-    title: 'The Last Emberwing',
-    client: 'Personal R&D',
-    year: '2026',
-    categories: ['games'],
-    featured: false,
-    cover: '/images/sablier/board-cimetiere.jpg',
-    coverAlt: 'Dark fantasy illustration standing in for The Last Emberwing concept',
-    cardSize: 'std',
-    role: { en: 'Concept · World · Game feel', fr: 'Concept · Univers · Game feel' },
-    summary: {
-      en: 'An Unreal Engine 5 prototype: a mantis with an ember heart, built entirely from engine primitives so the idea could be tested before any art budget.',
-      fr: 'Un prototype Unreal Engine 5 : une mante au cœur de braise, construite uniquement à partir de primitives du moteur pour tester l’idée avant tout budget d’art.',
-    },
-    stack: 'Unreal 5 · C++ · Runtime rig',
-    repo: 'https://github.com/SalimB-source/the-last-emberwing',
-    detail: {
-      context: {
-        en: 'A personal R&D project: can a creature feel alive before it has a single texture? The prototype builds the mantis, its enemies and its arena at runtime from cubes, spheres and cones, with a lighting rig that generates its own moon.',
-        fr: 'Un projet de R&D personnel : une créature peut-elle sembler vivante avant d’avoir la moindre texture ? Le prototype construit la mante, ses ennemis et son arène au runtime à partir de cubes, de sphères et de cônes, avec un rig de lumière qui génère sa propre lune.',
-      },
-      approach: {
-        en: [
-          'Silhouette first: the rig is readable as a mantis from any angle, even unshaded.',
-          'A lighting rig that deletes broken level lights and installs three directionals with a fixed exposure — so the prototype never renders black.',
-          'Combat verbs before content: run, jump, glide, luminous strike, and enemies that answer.',
-        ],
-        fr: [
-          'La silhouette d’abord : le rig reste lisible comme une mante sous n’importe quel angle, même sans éclairage.',
-          'Un rig de lumière qui supprime les lumières cassées du niveau et installe trois directionnelles à exposition fixe — le prototype ne s’affiche jamais en noir.',
-          'Les verbes de combat avant le contenu : courir, sauter, planer, frapper, et des ennemis qui répondent.',
-        ],
-      },
-      craft: {
-        en: 'This is where I test game feel without an art team: if the character is fun as grey primitives, it will be fun with a budget.',
-        fr: 'C’est là que je teste le game feel sans équipe d’art : si le personnage est amusant en primitives grises, il le sera avec un budget.',
-      },
-      facts: [
-        { label: { en: 'Engine', fr: 'Moteur' }, value: 'Unreal 5' },
-        { label: { en: 'Assets', fr: 'Assets' }, value: 'Generated at runtime' },
-        { label: { en: 'Platforms', fr: 'Plateformes' }, value: 'PC · Android' },
-        { label: { en: 'Scope', fr: 'Portée' }, value: 'Playable prototype' },
       ],
     },
   },
