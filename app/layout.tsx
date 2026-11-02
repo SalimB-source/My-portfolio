@@ -4,6 +4,7 @@ import { LanguageProvider } from './providers';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { SITE } from '@/content/site';
+import { asset } from '@/lib/asset';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.siteUrl),
@@ -62,7 +63,7 @@ const personSchema = {
   email: `mailto:${SITE.email}`,
   telephone: SITE.phone,
   url: SITE.siteUrl,
-  image: `${SITE.siteUrl}/images/profile/portrait.jpg`,
+  image: `${SITE.siteUrl}${asset('/images/profile/portrait.jpg')}`,
   address: { '@type': 'PostalAddress', addressLocality: 'Algiers', addressCountry: 'DZ' },
   sameAs: [SITE.socials.linkedin, SITE.socials.github],
   knowsAbout: [

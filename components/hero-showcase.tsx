@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useLang } from '@/app/providers';
+import { asset } from '@/lib/asset';
 import { ArrowUpRight } from './icons';
 import Link from 'next/link';
 
@@ -65,7 +66,7 @@ export function HeroShowcase() {
         {SLIDES.map((s, i) => (
           <Image
             key={s.src}
-            src={s.src}
+            src={asset(s.src)}
             alt={s.alt}
             fill
             sizes="(max-width: 960px) 100vw, 44vw"
@@ -101,7 +102,7 @@ export function HeroShowcase() {
             aria-label={`${s.title[lang]} — ${s.meta[lang]}`}
             onClick={() => pick(i)}
           >
-            <Image src={s.src} alt="" fill sizes="15vw" style={{ objectFit: 'cover' }} />
+            <Image src={asset(s.src)} alt="" fill sizes="15vw" style={{ objectFit: 'cover' }} />
           </button>
         ))}
       </div>

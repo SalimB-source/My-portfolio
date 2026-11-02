@@ -100,7 +100,8 @@ convert(L('vice-city-rush-keyart.jpg'), 'vice-city/keyart.jpg', { width: 2000 })
 convert(L('car-ae86.jpg'), 'vice-city/car.jpg', { width: 1800 });
 convert(L('vice-city-story-nordschleife.jpg'), 'vice-city/nordschleife.jpg', { width: 1800 });
 convert(L('route-66-thumb.jpg'), 'vice-city/route-66.jpg', { width: 1800 });
-convert(L('tokyo-thumb.jpg') || L('tokyo-game-show-2026-news.jpg'), 'vice-city/tokyo.jpg', { width: 1800 });
+// Tokyo has no `tokyo-thumb.jpg`; the story still is the good, wide source.
+convert(L('vice-city-story-tokyo.webp'), 'vice-city/tokyo.jpg', { width: 1800 });
 convert(L('vice-city-action-paris.webp'), 'vice-city/paris.jpg', { width: 1800 });
 convert(L('vice-city-action-new-york.webp'), 'vice-city/new-york.jpg', { width: 1800 });
 

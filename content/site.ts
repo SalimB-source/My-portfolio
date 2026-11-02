@@ -1,3 +1,5 @@
+import { asset } from '@/lib/asset';
+
 /* ==========================================================================
    Site data — single source of truth, in both languages.
    Every claim here is traceable to one of the source repositories:
@@ -25,7 +27,8 @@ export const SITE = {
     instagram: 'https://www.instagram.com/letsplay.officiel/',
     iris: 'https://www.linkedin.com/company/iris-studio-alger',
   },
-  siteUrl: 'https://salimb-portfolio.vercel.app',
+  /** Production URL. Override with NEXT_PUBLIC_SITE_URL when the domain changes. */
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://salimb-source.github.io/My-portfolio',
 };
 
 /** Numbers that appear across pages. Round, honest, sourced. */

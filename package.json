@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3000",
     "build": "next build",
+    "build:pages": "GITHUB_PAGES=true next build",
+    "preview:pages": "npx serve out",
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "assets": "node tools/prepare-assets.mjs"
@@ -17,6 +19,9 @@
     "next": "16.4.4",
     "react": "19.3.1",
     "react-dom": "19.3.1"
+  },
+  "optionalDependencies": {
+    "@opentelemetry/api": "^1.9.0"
   },
   "devDependencies": {
     "@types/node": "26.6.6",
