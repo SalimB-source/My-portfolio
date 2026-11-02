@@ -1456,6 +1456,219 @@ h1.display {
   .game__specs { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* ---------- real cards, drawn as cards ---------- */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.spec-card {
+  --elem: rgba(247, 242, 233, 0.28);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--r) * 1.4);
+  overflow: hidden;
+  background: #100e0c;
+  transition: transform 0.4s var(--ease, ease), border-color 0.4s ease;
+}
+
+.spec-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--elem);
+}
+
+/* Each colour keeps its own frame tint, like the real card frames. */
+.spec-card--sable { --elem: #d9c08a; }
+.spec-card--braise { --elem: #ff6b35; }
+.spec-card--eau { --elem: #5ea9c9; }
+.spec-card--neige { --elem: #a8d6e8; }
+.spec-card--tenebres { --elem: #9a6bd4; }
+
+.spec-card__art {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-bottom: 2px solid var(--elem);
+}
+
+.spec-card__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* The mana cost sits on the art, as on the table. */
+.spec-card__cost {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(11, 10, 9, 0.82);
+  border: 1px solid var(--elem);
+  color: var(--elem);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+}
+
+.spec-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0.9rem 0.95rem 1rem;
+}
+
+.spec-card__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--fg-strong);
+}
+
+.spec-card__type {
+  margin-top: 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  color: var(--elem);
+  opacity: 0.9;
+}
+
+.spec-card__text {
+  margin-top: 0.6rem;
+  flex: 1;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.spec-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--line);
+}
+
+.spec-card__kw {
+  display: flex;
+  gap: 0.35rem;
+  color: var(--elem);
+}
+
+.spec-card__stats {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--fg-strong);
+}
+
+/* ---------- the five colours ---------- */
+.colour-wheel {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.colour {
+  --elem: #d9c08a;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: #100e0c;
+}
+
+.colour--sable { --elem: #d9c08a; }
+.colour--braise { --elem: #ff6b35; }
+.colour--eau { --elem: #5ea9c9; }
+.colour--neige { --elem: #a8d6e8; }
+.colour--tenebres { --elem: #9a6bd4; }
+
+.colour__art {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-bottom: 2px solid var(--elem);
+}
+
+.colour__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.colour:hover .colour__art img {
+  transform: scale(1.05);
+  filter: saturate(1.05);
+}
+
+.colour__meta {
+  padding: 0.8rem 0.85rem 1rem;
+}
+
+.colour__name {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--elem);
+}
+
+.colour__count {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.colour__note {
+  margin-top: 0.5rem;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* rule + mode icons */
+.game__rule-icon,
+.game__mode-icon {
+  margin-right: 0.45rem;
+  vertical-align: -2px;
+}
+
+.game__mode-icon {
+  color: var(--brand);
+  margin-right: 0.55rem;
+  vertical-align: -3px;
+}
+
+@media (max-width: 1024px) {
+  .spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .colour-wheel { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  .spec-grid { grid-template-columns: minmax(0, 1fr); }
+  .colour-wheel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 /* ---------- facts / clients ---------- */
 .facts {
   display: grid;

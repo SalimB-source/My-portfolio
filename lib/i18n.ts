@@ -131,6 +131,17 @@ export const T = {
     gameConcept: { en: 'Concept', fr: 'Le concept' },
     gameMechanics: { en: 'Mechanics', fr: 'Les mécaniques' },
     gameModes: { en: 'Modes', fr: 'Les modes' },
+    gameCards: { en: 'Real cards', fr: 'De vraies cartes' },
+    gameCardsLead: {
+      en: 'Six cards from the current set, with their printed text — the fastest way to see what the duel actually asks of a player.',
+      fr: 'Six cartes du set actuel, avec leur texte imprimé — le moyen le plus rapide de voir ce que le duel demande vraiment à un joueur.',
+    },
+    gameColours: { en: 'The five colours', fr: 'Les cinq couleurs' },
+    gameColoursLead: {
+      en: 'Each colour owns a Tower, a terrain card, and a temperament. The counts are creatures per colour in the current catalogue.',
+      fr: 'Chaque couleur possède une Tour, une carte terrain, et un tempérament. Les chiffres comptent les créatures par couleur dans le catalogue actuel.',
+    },
+    gameCreatures: { en: 'creatures', fr: 'créatures' },
     all: { en: 'All projects', fr: 'Tous les projets' },
     back: { en: 'Back to work', fr: 'Retour aux projets' },
     more: { en: 'More work', fr: 'Autres projets' },
