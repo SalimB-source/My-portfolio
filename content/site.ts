@@ -50,6 +50,28 @@ export const FACTS = {
 
 export type Category = 'product' | 'games' | 'brand';
 
+/** A labelled paragraph, used for concepts and for modes. */
+export type DetailBlock = {
+  title: { en: string; fr: string };
+  body: { en: string; fr: string };
+};
+
+/** One named rule of the combat system. */
+export type Mechanic = {
+  name: { en: string; fr: string };
+  body: { en: string; fr: string };
+};
+
+/** The "the game itself" section of a playable project. */
+export type GameDetail = {
+  pitch: { en: string; fr: string };
+  /** Genre, players, format, session — the short answers. */
+  specs: { label: { en: string; fr: string }; value: { en: string; fr: string } }[];
+  concept: DetailBlock[];
+  mechanics: Mechanic[];
+  modes: DetailBlock[];
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -68,6 +90,11 @@ export type Project = {
   repo?: string;
   /** Sections of the detail page. */
   detail: {
+    /**
+     * Playable titles only: concept, mechanics and modes, so a reader who does
+     * not play card games still understands what the thing is.
+     */
+    game?: GameDetail;
     context: { en: string; fr: string };
     approach: { en: string[]; fr: string[] };
     craft: { en: string; fr: string };
@@ -164,6 +191,127 @@ export const PROJECTS: Project[] = [
     stack: '422 cards · 18 boards',
     live: 'https://let-s-play-nu.vercel.app/jeu/sablier-de-bab-el',
     detail: {
+      game: {
+        pitch: {
+          en: 'A turn-based card duel set in Bab El, a nine-storey city built on a sealed gate above a rising desert. Every cycle, the Astrolabe sounds and the lowest floor is taken back by the sand.',
+          fr: 'Un duel de cartes au tour par tour dans Bab El, ville de neuf étages bâtie sur un portail scellé, au-dessus d’un désert qui monte. À chaque cycle, l’Astrolabe sonne et l’étage le plus bas est repris par le sable.',
+        },
+        specs: [
+          {
+            label: { en: 'Genre', fr: 'Genre' },
+            value: { en: 'Tactical card RPG', fr: 'RPG tactique de cartes' },
+          },
+          {
+            label: { en: 'Format', fr: 'Format' },
+            value: { en: 'Solo campaign, 1v1 online', fr: 'Campagne solo, 1c1 en ligne' },
+          },
+          {
+            label: { en: 'Deck', fr: 'Deck' },
+            value: { en: '40 cards', fr: '40 cartes' },
+          },
+          {
+            label: { en: 'Platforms', fr: 'Plateformes' },
+            value: { en: 'Browser, landscape phone', fr: 'Navigateur, téléphone en paysage' },
+          },
+        ],
+        concept: [
+          {
+            title: { en: 'The city that counts its floors', fr: 'La ville qui compte ses étages' },
+            body: {
+              en: 'Bab El was built around a gate nobody opens. Nine floors, tramways of copper, suspended souks, a sky-clock — the Astrolabe — that does not tell the time but counts the cycles left. Floor one is already gone; the story starts at floor four. Everyone knows, and everyone keeps living.',
+              fr: 'Bab El a été bâtie autour d’un portail que personne n’ouvre. Neuf étages, des tramways de cuivre, des souks suspendus, une horloge céleste — l’Astrolabe — qui ne donne pas l’heure mais compte les cycles restants. L’étage un est déjà perdu ; l’histoire commence au quatrième. Tout le monde le sait, et tout le monde continue de vivre.',
+            },
+          },
+          {
+            title: { en: 'The villain is an administration', fr: 'Le méchant est une administration' },
+            body: {
+              en: 'The Chambre des Heures does not worship anything — it calculates, publishes and evacuates. Each cycle it posts the Liste: which districts are a priority, and which are not. Its agents carry registers, not weapons. The Grand Horloger is gentle, polite and has signed the Liste his whole life. He is not the evil; he is the question.',
+              fr: 'La Chambre des Heures ne voue aucun culte : elle calcule, publie et évacue. À chaque cycle elle affiche la Liste — les quartiers prioritaires, et les autres. Ses agents portent des registres, pas des armes. Le Grand Horloger est doux, poli, et a signé la Liste toute sa vie. Il n’est pas le mal : il est la question.',
+            },
+          },
+          {
+            title: { en: 'The lie at the centre', fr: 'Le mensonge au centre' },
+            body: {
+              en: 'The gate is not broken. It is locked from the inside. What is happening to Bab El is not a disaster it suffers but a quarantine it maintains without knowing — and the Horloger is the ninth of a line of people who know and say nothing, because panic costs more lives than sand does.',
+              fr: 'Le portail n’est pas cassé : il est verrouillé de l’intérieur. Ce qui arrive à Bab El n’est pas une catastrophe qu’elle subit mais une quarantaine qu’elle entretient sans le savoir — et le Horloger est le neuvième d’une lignée de gens qui savent et se taisent, parce que la panique coûte plus de vies que le sable.',
+            },
+          },
+        ],
+        mechanics: [
+          {
+            name: { en: 'No reflexes, only decisions', fr: 'Aucun réflexe, seulement des décisions' },
+            body: {
+              en: 'Every enemy announces its action one round ahead — icon, move, target, estimated damage. Nothing lands unannounced. The tension comes from what you know, not from what you fail to time, and a loss is never a surprise.',
+              fr: 'Chaque ennemi annonce son action un round à l’avance — icône, coup, cible, dégâts estimés. Rien n’arrive sans avoir été annoncé. La tension vient de ce qu’on sait, pas de ce qu’on rate, et une défaite n’est jamais une surprise.',
+            },
+          },
+          {
+            name: { en: 'Four answers, all chosen', fr: 'Quatre réponses, toutes choisies' },
+            body: {
+              en: 'Guard cuts the next hit by 60 %. A glass barrage absorbs damage until it breaks. A counter-element spell strikes the attacker with the element that beats theirs, halving the blow and adding Fêlure. Repositioning moves you up a floor, out of a zone. Each costs one of three action points, so guarding is a real sacrifice.',
+              fr: 'La Garde coupe le prochain coup de 60 %. Un barrage de verre absorbe les dégâts jusqu’à se briser. Un contre-élément frappe l’attaquant avec l’élément qui bat le sien : coup réduit de moitié et Fêlure en plus. Se repositionner fait monter d’un étage, hors de la zone. Chacune coûte un des trois points d’action : garder est un vrai sacrifice.',
+            },
+          },
+          {
+            name: { en: 'Sand is the second health bar', fr: 'Le sable est la seconde barre de vie' },
+            body: {
+              en: 'Half of every wound falls to the ground and stays there, on the owner’s side of the board. Harvest it to heal, blow it away from an enemy before they heal on it, or let it pile up to pay for the biggest spells. The same fight can cost everyone 500 HP or 200.',
+              fr: 'La moitié de chaque blessure tombe au sol et y reste, du côté de sa victime. On la récolte pour se soigner, on la souffle à l’ennemi avant qu’il ne s’en soigne, ou on la laisse s’accumuler pour payer les plus gros sorts. Le même combat peut coûter 500 PV à tout le monde ou 200.',
+            },
+          },
+          {
+            name: { en: 'The staircase arena', fr: 'L’arène en escalier' },
+            body: {
+              en: 'Combat happens across three floors. Striking from above adds 15 % damage per floor; being struck from above shaves 5 % per floor. Everyone slides down one floor each round, and dropping an enemy from the third to the first triggers La Chute at ×1.4. Height is a resource that melts.',
+              fr: 'Le combat se joue sur trois étages. Frapper d’en haut ajoute 15 % de dégâts par étage ; être frappé d’en haut en retire 5 % par étage. Tout le monde descend d’un étage à chaque round, et faire chuter un ennemi du troisième au premier déclenche La Chute à ×1,4. La hauteur est une ressource qui fond.',
+            },
+          },
+          {
+            name: { en: 'Verre, Fêlure, Consonance', fr: 'Verre, Fêlure, Consonance' },
+            body: {
+              en: 'Three glass tokens — earned by guarding the announced target, landing a counter-element, or a Consonance — crystallise a skill at double power. Fêlure builds on each enemy until it cracks: it stops acting, takes double damage and the next skill is free. Consonance rewards using three different elements in one round with ×1.5.',
+              fr: 'Trois jetons de verre — gagnés en gardant la cible annoncée, en réussissant un contre-élément ou une Consonance — cristallisent une compétence à puissance double. La Fêlure monte sur chaque ennemi jusqu’à le fendre : il n’agit plus, subit ×2 et la compétence suivante est gratuite. La Consonance récompense trois éléments différents dans un round par ×1,5.',
+            },
+          },
+          {
+            name: { en: 'The Astrolabe as a clock', fr: 'L’Astrolabe comme horloge' },
+            body: {
+              en: 'A visible counter runs during the fight. Every five rounds it sounds: every enemy gains 20 % attack for two rounds and everyone drops an extra floor. Long fights get harder with time, exactly as the city does.',
+              fr: 'Un compteur visible tourne pendant le combat. Toutes les cinq manches, il sonne : tous les ennemis gagnent 20 % d’attaque pendant deux rounds et tout le monde descend d’un étage de plus. Les combats longs durcissent avec le temps, exactement comme la ville.',
+            },
+          },
+        ],
+        modes: [
+          {
+            title: { en: 'Story — the Towers of Bab El', fr: 'Histoire — les Tours de Bab El' },
+            body: {
+              en: 'You climb towers floor by floor. Each floor is held by a sorcerer of the Chambre des Heures with their own deck, personality and AI profile; the top is a Grand Horloger. Progress carries between floors, and nothing is ever gated behind grinding. Ten towers and forty-three floors so far — the Listes, the Souk, the Abysses, the Fjord — each leaning on its own colour.',
+              fr: 'On gravit des tours étage par étage. Chaque étage est tenu par un sorcier de la Chambre des Heures, avec son deck, sa personnalité et son profil d’IA ; le sommet est un Grand Horloger. La progression se conserve entre les étages, et rien n’est verrouillé derrière du farm. Dix tours et quarante-trois étages à ce jour — les Listes, le Souk, les Abysses, le Fjord — chacune appuyée sur sa propre couleur.',
+            },
+          },
+          {
+            title: { en: 'Online 1v1 — challenge by link', fr: '1c1 en ligne — défi par lien' },
+            body: {
+              en: 'A duel is launched by a clickable invitation rather than a waiting queue: two players, any hour, resumable — the right shape for a turn-based game with no reflexes. Because each hand and draw order is secret, a single referee holds the only true copy of the game and sends each player a filtered view.',
+              fr: 'Un duel se lance par une invitation cliquable plutôt que par une file d’attente : deux joueurs, n’importe quelle heure, reprenable — la bonne forme pour un jeu au tour par tour sans réflexes. Chaque main et chaque ordre de pioche étant secrets, un arbitre unique détient la seule copie vraie de la partie et renvoie à chacun une vue filtrée.',
+            },
+          },
+          {
+            title: { en: 'Decks — the shelf and the workshop', fr: 'Decks — l’étagère et l’atelier' },
+            body: {
+              en: 'Decks are 3D boxes on a shelf; a box opens to reveal its cards, and the one you select is remembered on the device. The workshop builds new boxes two ways: assisted (answer two questions about colour and play style) or manual. Home-made decks are labelled DECK MAISON and sync by account.',
+              fr: 'Les decks sont des boîtiers 3D sur une étagère ; un boîtier s’ouvre pour révéler ses cartes, et celui qu’on sélectionne est mémorisé sur l’appareil. L’atelier fabrique de nouveaux boîtiers de deux façons : assistée (deux questions sur la couleur et le style de jeu) ou manuelle. Les decks maison portent l’étiquette DECK MAISON et se synchronisent par compte.',
+            },
+          },
+          {
+            title: { en: 'The Souk and the collection', fr: 'Le Souk et la collection' },
+            body: {
+              en: 'Credits earned by playing — daily quests, wins, first clears — buy five-card boosters. Nothing is ever paid for with real money, a booster never skips the pacing of the towers, and nothing earned ever goes backwards. Player XP adds a third currency: each level crossed opens a free booster.',
+              fr: 'Les crédits gagnés en jouant — quêtes du jour, victoires, premières victoires d’un étage — achètent des boosters de cinq cartes. Rien ne se paie avec de l’argent réel, un booster ne court-circuite jamais le rythme des tours, et rien d’acquis ne redescend. L’XP ajoute une troisième monnaie : chaque niveau franchi ouvre un booster offert.',
+            },
+          },
+        ],
+      },
       context: {
         en: 'The Sablier is the card game at the centre of the Let’s Play arcade. Its world is Maghreb-rooted: Bab El Oued, Tipaza, the Erg, the Souk. Every duel happens on a painted board, and every card is a character with a portrait, a frame and a power.',
         fr: 'Le Sablier est le jeu de cartes au centre de l’arcade Let’s Play. Son monde est ancré au Maghreb : Bab El Oued, Tipaza, l’Erg, le Souk. Chaque duel se joue sur un plateau peint, et chaque carte est un personnage avec son portrait, son cadre et son pouvoir.',
@@ -190,7 +338,7 @@ export const PROJECTS: Project[] = [
         { label: { en: 'Card artworks', fr: 'Illustrations de cartes' }, value: '422' },
         { label: { en: 'Painted boards', fr: 'Plateaux peints' }, value: '18' },
         { label: { en: 'Formats', fr: 'Formats' }, value: 'Landscape + portrait' },
-        { label: { en: 'Modes', fr: 'Modes' }, value: 'Story · PvP · Decks' },
+        { label: { en: 'Modes', fr: 'Modes' }, value: 'Story · PvP · Decks · Souk' },
       ],
       gallery: [
         { src: '/images/sablier/keyart-hd.jpg', caption: { en: 'Key art — the citadel and the clock', fr: 'Key art — la citadelle et l’horloge' } },

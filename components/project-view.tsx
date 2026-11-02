@@ -80,6 +80,83 @@ export function ProjectView({ project, next }: { project: Project; next: Project
         </div>
       </header>
 
+      {d.game && (
+        <>
+          <section className="section">
+            <div className="container">
+              <div className="head">
+                <div className="head__copy">
+                  <span className="eyebrow">{T.project.game[lang]}</span>
+                  <p className="game__pitch">{d.game.pitch[lang]}</p>
+                </div>
+              </div>
+              <dl className="game__specs">
+                {d.game.specs.map((s) => (
+                  <div className="game__spec" key={s.label.en}>
+                    <dt>{s.label[lang]}</dt>
+                    <dd>{s.value[lang]}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="container">
+              <div className="split">
+                <div className="aside-sticky">
+                  <span className="eyebrow">{T.project.gameConcept[lang]}</span>
+                </div>
+                <div className="game__blocks">
+                  {d.game.concept.map((c, i) => (
+                    <Reveal as="article" className="game__block" key={c.title.en} delay={i * 50}>
+                      <h3 className="h3">{c.title[lang]}</h3>
+                      <p>{c.body[lang]}</p>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="container">
+              <div className="split">
+                <div className="aside-sticky">
+                  <span className="eyebrow">{T.project.gameMechanics[lang]}</span>
+                </div>
+                <div className="game__rules">
+                  {d.game.mechanics.map((m, i) => (
+                    <Reveal as="article" className="game__rule" key={m.name.en} delay={i * 40}>
+                      <h3 className="game__rule-name">{m.name[lang]}</h3>
+                      <p>{m.body[lang]}</p>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="container">
+              <div className="split">
+                <div className="aside-sticky">
+                  <span className="eyebrow">{T.project.gameModes[lang]}</span>
+                </div>
+                <div className="game__modes">
+                  {d.game.modes.map((m, i) => (
+                    <Reveal as="article" className="game__mode" key={m.title.en} delay={i * 50}>
+                      <h3 className="h3">{m.title[lang]}</h3>
+                      <p>{m.body[lang]}</p>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+
       <section className="section">
         <div className="container">
           <div className="split">
