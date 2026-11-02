@@ -1,164 +1,133 @@
-# Salim Benmokhtar - Creative Graphic Designer Portfolio
+# Salim Benmokhtar — portfolio
 
-Welcome to my modern, fully responsive portfolio website! This is a showcase of my 10+ years of experience in visual communication and design.
+A multipage portfolio for graphic design, art direction and AI-assisted web design &
+front-end work. Bilingual (English / French), statically rendered, deployable on
+Vercel or any Node host.
 
-## 🎨 Features
-
-✨ **Modern & Professional Design**
-- Clean, minimalist layout with focus on your work
-- Smooth animations and transitions
-- Beautiful gradient accents with purple and red theme
-
-🎯 **Responsive & Mobile-First**
-- Works perfectly on desktop, tablet, and mobile
-- Hamburger menu for mobile navigation
-- Optimized performance
-
-✨ **Interactive Elements**
-- Parallax scrolling effect on hero section
-- Smooth fade-up animations as you scroll
-- Portfolio filtering by category (Branding, UX, Motion)
-- Hover effects on all interactive elements
-
-🚀 **Easy to Customize**
-- Simple HTML/CSS/JS - no complex frameworks
-- Well-commented code
-- Easy to update text, colors, and images
-
-## 📁 Project Structure
-
-```
-My-portfolio/
-├── index.html           # Main HTML file
-├── css/
-│   └── style.css       # Complete styling
-├── js/
-│   └── script.js       # Interactive features
-├── assets/
-│   └── images/         # Your portfolio images
-├── README.md           # This file
-└── .gitignore          # Git ignore file
-```
-
-## 🖼️ Asset Requirements
-
-To display your work properly, add images to the `assets/images/` folder:
-
-- **profile.jpg** - Your profile photo (200x200px recommended)
-- **project-1.jpg** through **project-6.jpg** - Your portfolio work samples (400x300px recommended)
-- **resume.pdf** - Your resume file (optional, for download button)
-
-## 🎨 Customization Guide
-
-### Change Colors
-
-Open `css/style.css` and look for the color variables at the top:
-
-```css
-:root {
-    --primary-color: #ff6b6b;      /* Red - main accent */
-    --secondary-color: #4e54c8;    /* Purple - secondary accent */
-    --dark-bg: #1a1a2e;            /* Dark background */
-    --light-bg: #f8f9ff;           /* Light background */
-    --text-dark: #2d3436;          /* Dark text */
-    --text-light: #636e72;         /* Light text */
-}
-```
-
-### Update Your Information
-
-Edit `index.html` and update:
-
-1. **Hero Section** - Your name and title
-2. **About Section** - Your bio and experience
-3. **Services Section** - What you offer
-4. **Portfolio Section** - Your project descriptions
-5. **Contact Section** - Your email, phone, and social links
-
-### Add Social Media Links
-
-In the footer and contact sections, update the social media links:
-```html
-<a href="https://linkedin.com/in/yourprofile" target="_blank">
-    <i class="fab fa-linkedin"></i>
-</a>
-```
-
-## 🚀 Deployment
-
-### Deploy on GitHub Pages (Free!)
-
-1. Make sure your files are committed to your repository
-2. Go to your GitHub repository **Settings** → **Pages**
-3. Select `main` branch as the source
-4. Click Save
-5. Your site goes live at: `https://SalimB-source.github.io/My-portfolio`
-
-It may take a few minutes to publish. You can check the status in the Pages section.
-
-### Deploy on Other Platforms
-
-You can also deploy to:
-- **Netlify** - Drag and drop your files
-- **Vercel** - Connect your GitHub repo
-- **Hostinger** - Upload via FTP
-- Any web host supporting static HTML
-
-## 📱 Responsive Design
-
-The website is fully responsive with breakpoints for:
-- Desktop: 1200px and above
-- Tablet: 768px to 1199px
-- Mobile: Below 768px
-- Small Mobile: Below 480px
-
-## 🔧 Browser Compatibility
-
-Works on:
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers
-
-## ✨ JavaScript Features
-
-- **Parallax Scrolling** - Background moves slower than foreground
-- **Fade-up Animations** - Elements animate in as you scroll
-- **Mobile Menu** - Hamburger menu on small screens
-- **Portfolio Filtering** - Click to filter by category
-- **Scroll-to-Top** - Quick navigation button
-- **Smooth Scrolling** - Smooth navigation to sections
-
-## 📊 SEO & Performance
-
-- Semantic HTML structure
-- Meta tags for search engines
-- Fast loading performance
-- Mobile-friendly design
-- Accessibility features
-
-## 🎯 Tips for Maximum Impact
-
-1. **Use High-Quality Images** - Your portfolio work should look stunning
-2. **Update Project Descriptions** - Make each project description compelling
-3. **Keep It Updated** - Add new projects regularly
-4. **Optimize Images** - Compress images for faster loading
-5. **Add Social Proof** - Link to your social media
-6. **Include Call-to-Action** - Make it easy for clients to contact you
-
-## 📧 Contact & Support
-
-For questions or issues with the website:
-- Email: selimbenmokhar@gmail.com
-- Phone: +213 (0)770 474 007
-- Location: Alger, Algeria
-
-## 📄 License
-
-This portfolio website is created for Salim Benmokhtar. Feel free to customize and use it as needed.
+> Built with Next.js 16 (App Router), React 19 and hand-written CSS. No UI kit, no
+> template — the whole design system lives in `app/globals.css`.
 
 ---
 
-**Built with ❤️ by Copilot**
+## The pages
 
-Happy to help you showcase your amazing work! 🎨✨
+| Route | What it does |
+| --- | --- |
+| `/` | Hero, selected work (7 projects), capabilities, method, clients, principles, CTA |
+| `/work` | All 9 projects with a discipline filter |
+| `/work/[slug]` | Project case page: brief, approach, quote, gallery, at-a-glance facts, next project |
+| `/about` | Portrait, long-form story, timeline, tools, principles, contact |
+| `/cv` | One-page printable CV — the *Print / save as PDF* button produces a clean A4 |
+| `/contact` | Contact details plus a message form that composes a `mailto:` (nothing is stored) |
+
+Also generated: `sitemap.xml`, `robots.txt`, a web app manifest, `icon.svg`, and an
+`og-default.jpg` social card.
+
+## Bilingual, without a routing tax
+
+Language is a client context (`app/providers.tsx`) persisted in `localStorage` under
+`sb-lang`. On first visit it follows the browser (`fr*` → French, otherwise English).
+Copy lives in two places:
+
+- `lib/i18n.ts` — interface strings (`T.nav`, `T.hero`, …), each an `{ en, fr }` pair.
+- `content/site.ts` — long-form content: projects, capabilities, process, career,
+  skills, principles. Every project carries `role`, `summary`, `context`, `approach`,
+  `craft` and `facts` in both languages.
+
+`<html lang>` is updated on every switch, so screen readers and hyphenation follow.
+
+## Content is data, not markup
+
+Adding a project means adding one object to `PROJECTS` in `content/site.ts`. The work
+index, the filter counts, the “next project” link, the CV's selected-work block and
+`sitemap.xml` all derive from that array. Nothing else to touch.
+
+```ts
+{
+  slug: 'my-project',
+  title: 'My project',
+  client: '…', year: '2026',
+  categories: ['product'],        // product | games | brand
+  featured: true,                 // shown on the home page
+  cover: '/images/work/my.jpg', coverAlt: '…',
+  cardSize: 'wide',               // wide (8 cols) | half (6) | std (4)
+  role: { en: '…', fr: '…' },
+  summary: { en: '…', fr: '…' },
+  stack: 'React · Supabase',
+  live: 'https://…', repo: 'https://…',
+  detail: { context, approach, craft, facts, gallery, quote },
+}
+```
+
+## Images
+
+`public/images/` holds 51 optimised files (~8.5 MB) produced from the source
+repositories by `tools/prepare-assets.mjs`:
+
+| Source repo | What it contributes |
+| --- | --- |
+| `Let-s-Play` | platform, the three games, 8 board paintings, 5 card artworks |
+| `Iris-studio-NEW` | Let’s Play × Algérie Télécom and 7ouma Arena × Djezzy campaigns, portrait |
+| `egor-lobby-redesign` | lobby screenshots, EGOR mark |
+
+Regenerate after changing any of those repos:
+
+```bash
+node tools/prepare-assets.mjs \
+  --lp=/path/to/Let-s-Play \
+  --iris=/path/to/Iris-studio-NEW \
+  --egor=/path/to/egor-lobby-redesign
+```
+
+The social card (`public/images/og-default.jpg`) is composed by hand with
+ImageMagick from the Sablier key art and the self-hosted Archivo / Instrument Serif
+faces — regenerate it the same way if the positioning line ever changes.
+
+The script needs ImageMagick (`convert`) and never upscales. It crops board art to
+16:10, keeps card art at 3:4, caps width at 2,200 px and writes progressive JPEGs at
+quality 82. `next/image` then serves AVIF/WebP with a 30-day cache.
+
+## Design system, in short
+
+- **Ground:** `#0b0a09`, warm off-white type, a fixed film-grain overlay.
+- **Accent:** ember `#ff5a1f`; lime `#d9f26b` marks availability; violet gold only
+  inside artwork.
+- **Type:** Archivo Variable (display, width axis available), Instrument Serif italic
+  for the single accent word, JetBrains Mono for labels. All self-hosted through
+  Fontsource — no Google Fonts request, no layout shift.
+- **Rhythm:** `.section` bands alternate dark and paper (`.on-paper` re-maps the whole
+  palette through CSS variables), 12-column work grid, 3-up bento for capabilities.
+- **Motion:** one shared reveal (`components/use-reveal.ts`, IntersectionObserver,
+  reveals once), hovering never fights the reveal, and `prefers-reduced-motion`
+  disables all of it.
+- **Accessibility:** skip link, focus-visible rings, `aria-current` navigation,
+  `aria-pressed` toggles, labelled form fields, AA-contrast secondary text, and a
+  print stylesheet that drops the whole chrome.
+
+## Run it
+
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # static export of every page
+npm start
+```
+
+Node 22+ (see `.nvmrc`).
+
+## Deploy
+
+- **Vercel** — `vercel.json` is included; import the repo and deploy. The site URL is
+  read from `SITE.siteUrl` in `content/site.ts` for canonical links, Open Graph and
+  the sitemap, so update it once the final domain is known.
+- **Any Node host** — `npm run build && npm start`.
+
+`next/image` optimisation needs a server. On a purely static host, add
+`images: { unoptimized: true }` to `next.config.mjs` (images are already sized for the
+web) or export with `output: 'export'`.
+
+## Contact details used on the site
+
+Kept in one object (`SITE` in `content/site.ts`): email, phone, location, LinkedIn,
+GitHub, Instagram. Change them there and every page, the footer and the schema.org
+`Person` block follow.
