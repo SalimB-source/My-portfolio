@@ -77,7 +77,7 @@ const personSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body id="top">
         <a href="#main" className="skip-link">
           Skip to content
