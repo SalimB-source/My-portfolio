@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useLang } from '@/app/providers';
 import type { Project } from '@/content/site';
 import { T } from '@/lib/i18n';
+import { asset } from '@/lib/asset';
 import { ArrowUpRight, GitHub, Globe } from './icons';
 import { Reveal } from './reveal';
 
@@ -68,7 +69,7 @@ export function ProjectView({ project, next }: { project: Project; next: Project
 
           <div className="project-hero__media">
             <Image
-              src={project.cover}
+              src={asset(project.cover)}
               alt={project.coverAlt}
               fill
               priority
@@ -138,7 +139,7 @@ export function ProjectView({ project, next }: { project: Project; next: Project
                 <Reveal as="figure" key={g.src} delay={i * 50}>
                   <div className={`gallery__media${g.fit === 'contain' ? ' gallery__media--contain' : ''}`}>
                     <Image
-                      src={g.src}
+                      src={asset(g.src)}
                       alt={g.caption[lang]}
                       width={1200}
                       height={900}

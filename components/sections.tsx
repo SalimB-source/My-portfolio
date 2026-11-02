@@ -13,6 +13,7 @@ import {
   featuredProjects,
 } from '@/content/site';
 import { T } from '@/lib/i18n';
+import { asset } from '@/lib/asset';
 import { ProjectCard } from './project-card';
 import { Reveal } from './reveal';
 import { ArrowUpRight, Check } from './icons';
@@ -196,7 +197,7 @@ export function Clients() {
           {LOGOS.map((logo, i) => (
             <Reveal key={logo.name} delay={i * 45} className={`logo-plate logo-plate--${logo.plate}`}>
               <Image
-                src={logo.src}
+                src={asset(logo.src)}
                 alt={logo.name}
                 width={180}
                 height={70}

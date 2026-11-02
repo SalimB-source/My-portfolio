@@ -117,14 +117,53 @@ Node 22+ (see `.nvmrc`).
 
 ## Deploy
 
-- **Vercel** — `vercel.json` is included; import the repo and deploy. The site URL is
-  read from `SITE.siteUrl` in `content/site.ts` for canonical links, Open Graph and
-  the sitemap, so update it once the final domain is known.
-- **Any Node host** — `npm run build && npm start`.
+One codebase, two targets. The difference is a single environment variable.
 
-`next/image` optimisation needs a server. On a purely static host, add
-`images: { unoptimized: true }` to `next.config.mjs` (images are already sized for the
-web) or export with `output: 'export'`.
+### GitHub Pages (static export, live at `/My-portfolio`)
+
+```bash
+GITHUB_PAGES=true BASE_PATH=/My-portfolio \
+NEXT_PUBLIC_SITE_URL=https://salimb-source.github.io/My-portfolio \
+npm run build:pages      # → out/
+```
+
+`.github/workflows/deploy-pages.yml` does exactly this on every push to `main` and
+publishes `out/` with `actions/deploy-pages`. **One manual step:** repo →
+*Settings → Pages → Build and deployment → Source: **GitHub Actions***. Nothing else
+is needed — do not choose “Deploy from a branch”.
+
+What Pages changes, and why:
+
+| Setting | Effect |
+| --- | --- |
+| `output: 'export'` | emits plain HTML instead of a server |
+| `basePath` / `assetPrefix` | the project site lives at `/<repo>`, so URLs need that prefix |
+| `images.unoptimized` | Pages can't run the optimiser; pre-sized JPEGs are served as-is |
+| `headers()` dropped | custom headers need a server |
+| `trailingSlash` | `/work/` style URLs, which Pages serves reliably |
+| `.nojekyll` | stops Jekyll from stripping the `_next/` folder |
+
+Image paths in `content/site.ts` stay written as `/images/…`. `lib/asset.ts` prepends
+`NEXT_PUBLIC_BASE_PATH` at render time — that is the only place that knows about
+deployment, and Next itself prefixes metadata/OG URLs.
+
+### Vercel or any Node host (server build, image optimisation)
+
+Import the repo — `vercel.json` is included — or run `npm run build && npm start`.
+No environment variables required. `headers()` and `next/image` optimisation are
+active in this mode, so nothing from the Pages list applies.
+
+To serve a custom domain, set `NEXT_PUBLIC_SITE_URL` (used for canonical links, Open
+Graph tags and the sitemap) and drop `BASE_PATH` if the site moves to a domain root.
+
+### Preview the Pages export locally
+
+```bash
+npm run build:pages
+mkdir -p /tmp/preview && cp -a out/. /tmp/preview/My-portfolio/
+cd /tmp/preview && python3 -m http.server 8097
+# → http://localhost:8097/My-portfolio/
+```
 
 ## Contact details used on the site
 

@@ -15,5 +15,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npx tsc --noEmit
-      - run: npm run build
+      - name: Type-check
+        run: npx tsc --noEmit
+      - name: Server build (Vercel-style)
+        run: npm run build
+      - name: Static export (GitHub Pages)
+        run: npm run build:pages
+        env:
+          BASE_PATH: /My-portfolio

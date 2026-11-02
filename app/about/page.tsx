@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useLang } from '../providers';
 import { EXPERIENCE, PRINCIPLES, SITE, SKILLS } from '@/content/site';
 import { T } from '@/lib/i18n';
+import { asset } from '@/lib/asset';
 import { Reveal } from '@/components/reveal';
 import { CtaBand } from '@/components/sections';
 import { ArrowUpRight, GitHub, Instagram, LinkedIn, Mail } from '@/components/icons';
@@ -35,7 +36,7 @@ export default function AboutPage() {
 
             <Reveal delay={140} className="portrait">
               <Image
-                src="/images/profile/portrait.jpg"
+                src={asset('/images/profile/portrait.jpg')}
                 alt="Portrait of Salim Benmokhtar"
                 width={687}
                 height={917}

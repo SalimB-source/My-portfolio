@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLang } from '@/app/providers';
+import { asset } from '@/lib/asset';
 import type { Project } from '@/content/site';
 import { ArrowUpRight } from './icons';
 import { useReveal } from './use-reveal';
@@ -30,7 +31,7 @@ export function ProjectCard({
     >
       <div className="card__media">
         <Image
-          src={project.cover}
+          src={asset(project.cover)}
           alt={project.coverAlt}
           fill
           sizes="(max-width: 680px) 100vw, (max-width: 1024px) 50vw, 45vw"
