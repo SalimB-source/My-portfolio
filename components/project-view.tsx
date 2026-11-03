@@ -8,6 +8,7 @@ import { T } from '@/lib/i18n';
 import type { Lang } from '@/lib/i18n';
 import { asset } from '@/lib/asset';
 import { EffectIcon } from '@/components/effect-icon';
+import { WireframeView } from '@/components/wireframe';
 import { ArrowUpRight, GitHub, Globe } from './icons';
 import { Reveal } from './reveal';
 
@@ -292,6 +293,21 @@ export function ProjectView({ project, next }: { project: Project; next: Project
           <div className="container">
             <Reveal as="blockquote" className="pull">
               “{d.quote[lang]}”
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {d.wireframe && (
+        <section className="section">
+          <div className="container">
+            <div className="head">
+              <div className="head__copy">
+                <span className="eyebrow">{T.project.wireframe[lang]}</span>
+              </div>
+            </div>
+            <Reveal>
+              <WireframeView wire={d.wireframe} lang={lang} />
             </Reveal>
           </div>
         </section>

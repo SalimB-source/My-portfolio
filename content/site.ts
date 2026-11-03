@@ -66,6 +66,29 @@ export type Mechanic = {
   icon?: string;
 };
 
+/** One banded section of a site wireframe. */
+export type WireBlock = {
+  /** Vertical rhythm: full-bleed hero, wide band, or a two-up split. */
+  kind: 'hero' | 'band' | 'split' | 'grid' | 'reels' | 'strip' | 'cta';
+  /** Mono label, kept in the product's own words. */
+  label: string;
+  /** Optional right-hand side note shown in the gutter. */
+  meta?: string;
+  /** Items rendered inside the block (cards, tiles, reels…). */
+  items?: { title: string; note?: string }[];
+};
+
+/** A structural wireframe of a shipped site, section by section. */
+export type Wireframe = {
+  url: string;
+  intro: { en: string; fr: string };
+  /** The global chrome, drawn once above the page body. */
+  nav: string[];
+  blocks: WireBlock[];
+  /** What sits under the page body. */
+  footer: string[];
+};
+
 /** A real card from the game, shown as a specimen. */
 export type ShowcaseCard = {
   name: string;
@@ -124,6 +147,8 @@ export type Project = {
     facts: { label: { en: string; fr: string }; value: string }[];
     gallery?: { src: string; caption: { en: string; fr: string }; fit?: 'cover' | 'contain' }[];
     quote?: { en: string; fr: string };
+    /** Structural diagram of the shipped site, for product pages. */
+    wireframe?: Wireframe;
   };
 };
 
@@ -177,6 +202,123 @@ export const PROJECTS: Project[] = [
       craft: {
         en: 'The editorial layer is generated: a news bot drafts articles from sources, then a language model rewrites them in the house voice — with a deterministic fallback so a missing API key never breaks the front page. The design work was making 9 articles a day, four desks and 1,059 images look like one publication.',
         fr: 'La couche éditoriale est générée : un bot collecte les sources, un modèle de langage réécrit les articles dans la voix de la maison — avec un repli déterministe pour qu’une clé API absente ne casse jamais la une. Le travail de design a consisté à faire ressembler 9 articles par jour, quatre desks et 1 059 images à une seule publication.',
+      },
+      wireframe: {
+        url: 'let-s-play-nu.vercel.app',
+        intro: {
+          en: 'The home page of the platform, band by band, in the order the code renders it. Every block below exists in `src/pages/Home.jsx` — nothing is sketched in.',
+          fr: 'La page d’accueil de la plateforme, bande par bande, dans l’ordre où le code la rend. Chaque bloc ci-dessous existe dans `src/pages/Home.jsx` — rien n’est supposé.',
+        },
+        nav: ['Home', 'Actus', 'Communauté', 'Jeux', 'Quizz', 'Messages', 'Profil', 'Recherche'],
+        blocks: [
+          {
+            kind: 'hero',
+            label: 'HERO',
+            meta: 'fixed key art · shade · corner frame',
+            items: [
+              { title: 'Live eyebrow', note: 'pulsing dot + label' },
+              { title: 'H1', note: 'two lines, second in italic' },
+              { title: 'Lede', note: 'hero text' },
+              { title: 'CTA primary', note: '▶ watch episodes — YouTube' },
+              { title: 'CTA secondary', note: '→ enter the show — /news' },
+              { title: 'Awaited band', note: 'next release, pinned to the base' },
+            ],
+          },
+          {
+            kind: 'strip',
+            label: 'TICKER',
+            meta: 'infinite scroll',
+            items: [{ title: 'Keyword loop', note: 'repeated ✦ separated terms' }],
+          },
+          {
+            kind: 'strip',
+            label: 'HOME EXPLORE',
+            meta: 'anchor nav',
+            items: [
+              { title: 'Actu à la une' },
+              { title: 'Épisodes' },
+              { title: 'Quizz du jour' },
+              { title: 'Reels' },
+              { title: 'Live' },
+            ],
+          },
+          {
+            kind: 'split',
+            label: '01 — ACTU À LA UNE',
+            meta: 'FEATURED NEWS',
+            items: [
+              { title: 'Lead story', note: 'large card, trailer playable in place' },
+              { title: 'Secondary stack', note: 'two smaller cards' },
+              { title: 'Section link', note: '→ all news' },
+            ],
+          },
+          {
+            kind: 'grid',
+            label: '02 — ÉPISODES À LA UNE',
+            meta: 'FEATURED EPISODES · YOUTUBE',
+            items: [
+              { title: 'Episode 01', note: 'Algérie Télécom' },
+              { title: 'Episode 02', note: 'FFAC2023 × Ooredoo' },
+              { title: 'Episode 03', note: '7ouma Arena × Djezzy' },
+              { title: '→ see all', note: 'YouTube channel' },
+            ],
+          },
+          {
+            kind: 'band',
+            label: 'QUIZZ DU JOUR',
+            meta: 'lazy-loaded band',
+            items: [{ title: 'Daily quiz', note: 'Suspense fallback, then HomeQuizBand' }],
+          },
+          {
+            kind: 'reels',
+            label: 'REELS',
+            meta: 'YOUTUBE SHORTS · horizontal scroll',
+            items: [
+              { title: 'Reel 1', note: '9:16' },
+              { title: 'Reel 2', note: '9:16' },
+              { title: 'Reel 3', note: '9:16' },
+              { title: 'Reel 4', note: '9:16' },
+              { title: '→ all reels' },
+            ],
+          },
+          {
+            kind: 'split',
+            label: 'LIVE',
+            meta: 'YOUTUBE · LET’S PLAY OFFICIAL',
+            items: [
+              { title: 'Live player', note: 'embed + channel link' },
+            ],
+          },
+          {
+            kind: 'grid',
+            label: '03 — FORMATS',
+            meta: 'OUR PLAYGROUNDS',
+            items: [
+              { title: '01 Gaming', note: '✦ → /reviews' },
+              { title: '02 Cinema', note: '◎ → /news/cinema' },
+              { title: '03 Community', note: '⌁ → /communaute' },
+            ],
+          },
+          {
+            kind: 'strip',
+            label: 'PARTNERS',
+            meta: 'they play with us',
+            items: [
+              { title: 'Algérie Télécom' },
+              { title: 'Ooredoo' },
+              { title: 'Djezzy' },
+              { title: 'FFAC' },
+              { title: 'TCL' },
+            ],
+          },
+          {
+            kind: 'cta',
+            label: 'CLOSING CTA',
+            meta: 'yellow button → YouTube',
+            items: [{ title: 'Watch the show' }],
+          },
+        ],
+        footer: ['Sections', 'Social', 'Legal', 'Newsletter'],
       },
       facts: [
         { label: { en: 'Editorial desks', fr: 'Desks éditoriaux' }, value: '4' },
