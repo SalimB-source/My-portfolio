@@ -203,8 +203,8 @@ export const T = {
     },
     eligibility: { en: 'Eligibility', fr: 'Éligibilité' },
     eligibilityText: {
-      en: 'Algerian citizen. Targeting Atlantic Canada through the Atlantic Immigration Program and the Francophone Community Immigration Pilot — both employer-driven, both requiring an offer from a designated employer. Ten years of salaried employment, so the 1,560-hour requirement is met with documented experience. French native — schooled and university-educated in French — English professional.',
-      fr: 'Citoyen algérien. Ciblage du Canada atlantique via le Programme d’immigration au Canada atlantique et le Volet des collectivités francophones — tous deux pilotés par l’employeur et exigeant une offre d’un employeur désigné. Dix ans d’emploi salarié : l’exigence de 1 560 heures est couverte par une expérience documentée. Français langue maternelle — scolarité et études universitaires en français — anglais professionnel.',
+      en: 'Algerian citizen. Targeting Atlantic Canada through the Atlantic Immigration Program and the Francophone Community Immigration Pilot — both employer-driven, both requiring an offer from a designated employer. Ten years of professional practice in graphic design and art direction, salaried throughout; currently in a second year at Iris Studio. French native — schooled and university-educated in French — English professional.',
+      fr: 'Citoyen algérien. Ciblage du Canada atlantique via le Programme d’immigration au Canada atlantique et le Volet des collectivités francophones — tous deux pilotés par l’employeur et exigeant une offre d’un employeur désigné. Dix ans de pratique professionnelle en design graphique et direction artistique, en salariat ; actuellement en deuxième année chez Iris Studio. Français langue maternelle — scolarité et études universitaires en français — anglais professionnel.',
     },
   },
   contact: {
