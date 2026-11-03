@@ -18,8 +18,11 @@ export const SITE = {
   location: { en: 'Algiers, Algeria', fr: 'Alger, Algérie' },
   timezone: 'GMT+1',
   available: {
-    en: 'Open to roles in Canada — open work permit sponsorship welcome',
-    fr: 'Ouvert aux postes au Canada — parrainage de permis de travail bienvenu',
+    // Neither the AIP nor the FCIP is a sponsorship scheme: both are
+    // employer-driven and need an offer from a designated employer, so the
+    // old "sponsorship welcome" line was misleading to Canadian employers.
+    en: 'Seeking a role in Atlantic Canada — Atlantic Immigration Program and Francophone Community Immigration Pilot',
+    fr: 'En recherche d’un poste au Canada atlantique — Programme d’immigration au Canada atlantique et Volet des collectivités francophones',
   },
   socials: {
     linkedin: 'https://dz.linkedin.com/in/salim-benmokhtar-526408365',

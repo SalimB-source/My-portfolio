@@ -59,7 +59,7 @@ const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: SITE.name,
-  jobTitle: 'Graphic Designer & Web Designer',
+  jobTitle: 'Graphic Designer & Art Director',
   email: `mailto:${SITE.email}`,
   telephone: SITE.phone,
   url: SITE.siteUrl,

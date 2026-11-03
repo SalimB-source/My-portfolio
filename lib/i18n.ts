@@ -17,7 +17,7 @@ export const T = {
     langLabel: { en: 'Switch language', fr: 'Changer de langue' },
   },
   hero: {
-    eyebrow: { en: 'Algiers · available for Canada', fr: 'Alger · disponible pour le Canada' },
+    eyebrow: { en: 'Algiers · seeking a role in Atlantic Canada', fr: 'Alger · en recherche d’un poste au Canada atlantique' },
     titleA: { en: 'I design brands,', fr: 'Je dessine des marques,' },
     titleB: { en: 'then I build them', fr: 'puis je les construis' },
     titleC: { en: 'for the web.', fr: 'pour le web.' },
@@ -192,8 +192,8 @@ export const T = {
     back: { en: 'Back to the site', fr: 'Retour au site' },
     profile: { en: 'Profile', fr: 'Profil' },
     profileText: {
-      en: 'Graphic designer with 10 years of experience in brand identity, art direction and campaign design, now designing and building web products end to end. Comfortable owning a project from art direction to production CSS, and using AI tools where they measurably speed up production.',
-      fr: 'Graphic designer avec 10 ans d’expérience en identité de marque, direction artistique et design de campagne, qui dessine et construit désormais des produits web de bout en bout. À l’aise pour porter un projet de la direction artistique au CSS de production, et pour utiliser les outils d’IA là où ils accélèrent réellement la production.',
+      en: 'Graphic designer and art director with 10 years of practice in brand identity, packaging, campaign design and game interfaces. I design websites and build them myself where the project calls for it — two are live — and I use AI tools where they measurably speed up production.',
+      fr: 'Graphiste et directeur artistique, dix ans de pratique en identité de marque, packaging, design de campagne et interfaces de jeux. Je conçois des sites et je les construis moi-même quand le projet l’exige — deux sont en ligne — et j’utilise les outils d’IA là où ils accélèrent réellement la production.',
     },
     selected: { en: 'Selected projects', fr: 'Projets sélectionnés' },
     languages: { en: 'Languages', fr: 'Langues' },
@@ -203,8 +203,8 @@ export const T = {
     },
     eligibility: { en: 'Eligibility', fr: 'Éligibilité' },
     eligibilityText: {
-      en: 'Algerian citizen — open to relocation to Canada and to employer-supported work permit. Passport valid, no criminal record, available within 2 months.',
-      fr: 'Citoyen algérien — ouvert à une relocalisation au Canada et à un permis de travail soutenu par l’employeur. Passeport valide, casier vierge, disponible sous 2 mois.',
+      en: 'Algerian citizen. Targeting Atlantic Canada through the Atlantic Immigration Program and the Francophone Community Immigration Pilot — both employer-driven, both requiring an offer from a designated employer. Ten years of professional practice in graphic design and art direction, salaried throughout; currently in a second year at Iris Studio. French native — schooled and university-educated in French — English professional.',
+      fr: 'Citoyen algérien. Ciblage du Canada atlantique via le Programme d’immigration au Canada atlantique et le Volet des collectivités francophones — tous deux pilotés par l’employeur et exigeant une offre d’un employeur désigné. Dix ans de pratique professionnelle en design graphique et direction artistique, en salariat ; actuellement en deuxième année chez Iris Studio. Français langue maternelle — scolarité et études universitaires en français — anglais professionnel.',
     },
   },
   contact: {
@@ -243,7 +243,13 @@ export const T = {
       fr: 'Ce bouton ouvre votre application mail avec le message déjà rédigé — rien n’est stocké sur ce site.',
     },
     reply: { en: 'Or write directly to', fr: 'Ou écrivez directement à' },
-    availability: { en: 'Available from Q1 2027 · relocation to Canada supported', fr: 'Disponible au premier trimestre 2027 · relocalisation au Canada soutenue' },
+    availability: {
+      // No date is promised: the timing depends on a designated-employer offer,
+      // which cannot be scheduled. Say what is true — the programmes and the
+      // profile — rather than a date that would not survive the first call.
+      en: 'Targeting Atlantic Canada — Nova Scotia and New Brunswick — through the Atlantic Immigration Program and the Francophone Community Immigration Pilot.',
+      fr: 'Ciblage du Canada atlantique — Nouvelle-Écosse et Nouveau-Brunswick — via le Programme d’immigration au Canada atlantique et le Volet des collectivités francophones.',
+    },
   },
   footer: {
     tagline: {

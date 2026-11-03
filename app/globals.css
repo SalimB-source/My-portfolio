@@ -2233,6 +2233,8 @@ h1.display {
   color: var(--muted);
   transition: color 0.2s var(--ease);
   width: fit-content;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .footer__link:hover { color: var(--fg-strong); }
@@ -2789,6 +2791,9 @@ h1.display {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
   padding: 0.9rem 1.1rem;
   border-radius: var(--r);
   border: 1px solid color-mix(in srgb, var(--lime) 28%, transparent);
