@@ -131,6 +131,11 @@ export const T = {
     gameConcept: { en: 'Concept', fr: 'Le concept' },
     gameMechanics: { en: 'Mechanics', fr: 'Les mécaniques' },
     gameModes: { en: 'Modes', fr: 'Les modes' },
+    wireframe: { en: 'The site, band by band', fr: 'Le site, bande par bande' },
+    wireframeLead: {
+      en: 'Eight pages of the platform, drawn as wireframes. Every block exists in the code — nothing here is sketched in.',
+      fr: 'Huit pages de la plateforme, dessinées en wireframes. Chaque bloc existe dans le code — rien ici n’est supposé.',
+    },
     gameCards: { en: 'Real cards', fr: 'De vraies cartes' },
     gameCardsLead: {
       en: 'Six cards from the current set, with their printed text — the fastest way to see what the duel actually asks of a player.',

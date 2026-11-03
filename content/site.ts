@@ -66,6 +66,34 @@ export type Mechanic = {
   icon?: string;
 };
 
+/** One banded section of a site wireframe. */
+export type WireBlock = {
+  /** Vertical rhythm: full-bleed hero, wide band, or a two-up split. */
+  kind: 'hero' | 'band' | 'split' | 'grid' | 'reels' | 'strip' | 'cta';
+  /** Mono label, kept in the product's own words. */
+  label: string;
+  /** Optional right-hand side note shown in the gutter. */
+  meta?: string;
+  /** Items rendered inside the block (cards, tiles, reels…). */
+  items?: { title: string; note?: string }[];
+};
+
+/** A structural wireframe of a shipped site, section by section. */
+export type Wireframe = {
+  /** Page name, e.g. "Home", "News". */
+  page: { en: string; fr: string };
+  /** What this page has to do, one line. */
+  job: { en: string; fr: string };
+  /** Path within the product. */
+  url: string;
+  intro: { en: string; fr: string };
+  /** The global chrome, drawn once above the page body. */
+  nav: string[];
+  blocks: WireBlock[];
+  /** What sits under the page body. */
+  footer: string[];
+};
+
 /** A real card from the game, shown as a specimen. */
 export type ShowcaseCard = {
   name: string;
@@ -124,6 +152,8 @@ export type Project = {
     facts: { label: { en: string; fr: string }; value: string }[];
     gallery?: { src: string; caption: { en: string; fr: string }; fit?: 'cover' | 'contain' }[];
     quote?: { en: string; fr: string };
+    /** Structural diagrams of the shipped site, one per page. */
+    wireframes?: Wireframe[];
   };
 };
 
@@ -178,6 +208,435 @@ export const PROJECTS: Project[] = [
         en: 'The editorial layer is generated: a news bot drafts articles from sources, then a language model rewrites them in the house voice — with a deterministic fallback so a missing API key never breaks the front page. The design work was making 9 articles a day, four desks and 1,059 images look like one publication.',
         fr: 'La couche éditoriale est générée : un bot collecte les sources, un modèle de langage réécrit les articles dans la voix de la maison — avec un repli déterministe pour qu’une clé API absente ne casse jamais la une. Le travail de design a consisté à faire ressembler 9 articles par jour, quatre desks et 1 059 images à une seule publication.',
       },
+      wireframes: [
+        {
+        page: { en: 'Home', fr: 'Accueil' },
+        job: {
+          en: 'Hold four desks, three games and a community on one front page.',
+          fr: 'Tenir quatre desks, trois jeux et une communauté sur une seule une.',
+        },
+        url: 'let-s-play-nu.vercel.app',
+        intro: {
+          en: 'The home page of the platform, band by band, in the order the code renders it. Every block below exists in `src/pages/Home.jsx` — nothing is sketched in.',
+          fr: 'La page d’accueil de la plateforme, bande par bande, dans l’ordre où le code la rend. Chaque bloc ci-dessous existe dans `src/pages/Home.jsx` — rien n’est supposé.',
+        },
+        nav: ['Home', 'Actus', 'Communauté', 'Jeux', 'Quizz', 'Messages', 'Profil', 'Recherche'],
+        blocks: [
+          {
+            kind: 'hero',
+            label: 'HERO',
+            meta: 'fixed key art · shade · corner frame',
+            items: [
+              { title: 'Live eyebrow', note: 'pulsing dot + label' },
+              { title: 'H1', note: 'two lines, second in italic' },
+              { title: 'Lede', note: 'hero text' },
+              { title: 'CTA primary', note: '▶ watch episodes — YouTube' },
+              { title: 'CTA secondary', note: '→ enter the show — /news' },
+              { title: 'Awaited band', note: 'next release, pinned to the base' },
+            ],
+          },
+          {
+            kind: 'strip',
+            label: 'TICKER',
+            meta: 'infinite scroll',
+            items: [{ title: 'Keyword loop', note: 'repeated ✦ separated terms' }],
+          },
+          {
+            kind: 'strip',
+            label: 'HOME EXPLORE',
+            meta: 'anchor nav',
+            items: [
+              { title: 'Actu à la une' },
+              { title: 'Épisodes' },
+              { title: 'Quizz du jour' },
+              { title: 'Reels' },
+              { title: 'Live' },
+            ],
+          },
+          {
+            kind: 'split',
+            label: '01 — ACTU À LA UNE',
+            meta: 'FEATURED NEWS',
+            items: [
+              { title: 'Lead story', note: 'large card, trailer playable in place' },
+              { title: 'Secondary stack', note: 'two smaller cards' },
+              { title: 'Section link', note: '→ all news' },
+            ],
+          },
+          {
+            kind: 'grid',
+            label: '02 — ÉPISODES À LA UNE',
+            meta: 'FEATURED EPISODES · YOUTUBE',
+            items: [
+              { title: 'Episode 01', note: 'Algérie Télécom' },
+              { title: 'Episode 02', note: 'FFAC2023 × Ooredoo' },
+              { title: 'Episode 03', note: '7ouma Arena × Djezzy' },
+              { title: '→ see all', note: 'YouTube channel' },
+            ],
+          },
+          {
+            kind: 'band',
+            label: 'QUIZZ DU JOUR',
+            meta: 'lazy-loaded band',
+            items: [{ title: 'Daily quiz', note: 'Suspense fallback, then HomeQuizBand' }],
+          },
+          {
+            kind: 'reels',
+            label: 'REELS',
+            meta: 'YOUTUBE SHORTS · horizontal scroll',
+            items: [
+              { title: 'Reel 1', note: '9:16' },
+              { title: 'Reel 2', note: '9:16' },
+              { title: 'Reel 3', note: '9:16' },
+              { title: 'Reel 4', note: '9:16' },
+              { title: '→ all reels' },
+            ],
+          },
+          {
+            kind: 'split',
+            label: 'LIVE',
+            meta: 'YOUTUBE · LET’S PLAY OFFICIAL',
+            items: [
+              { title: 'Live player', note: 'embed + channel link' },
+            ],
+          },
+          {
+            kind: 'grid',
+            label: '03 — FORMATS',
+            meta: 'OUR PLAYGROUNDS',
+            items: [
+              { title: '01 Gaming', note: '✦ → /reviews' },
+              { title: '02 Cinema', note: '◎ → /news/cinema' },
+              { title: '03 Community', note: '⌁ → /communaute' },
+            ],
+          },
+          {
+            kind: 'strip',
+            label: 'PARTNERS',
+            meta: 'they play with us',
+            items: [
+              { title: 'Algérie Télécom' },
+              { title: 'Ooredoo' },
+              { title: 'Djezzy' },
+              { title: 'FFAC' },
+              { title: 'TCL' },
+            ],
+          },
+          {
+            kind: 'cta',
+            label: 'CLOSING CTA',
+            meta: 'yellow button → YouTube',
+            items: [{ title: 'Watch the show' }],
+          },
+        ],
+        footer: ['Sections', 'Social', 'Legal', 'Newsletter'],
+        },
+        {
+          page: { en: 'News', fr: 'Actus' },
+          job: {
+            en: 'Publish nine articles a day without the front page ever looking assembled.',
+            fr: 'Publier neuf articles par jour sans que la une ait l’air assemblée à la main.',
+          },
+          url: 'let-s-play-nu.vercel.app/news',
+          intro: {
+            en: 'The editorial hub. Today’s stories first, then the three desks, then the archive.',
+            fr: 'Le hub éditorial. Les articles du jour d’abord, puis les trois desks, puis l’archive.',
+          },
+          nav: ['Home', 'Actus', 'Communauté', 'Jeux', 'Quizz', 'Messages', 'Profil', 'Recherche'],
+          blocks: [
+            {
+              kind: 'hero',
+              label: 'PAGE HEADER',
+              meta: 'PAGE / NEWS · THE LATEST ROUND',
+              items: [
+                { title: 'H1', note: 'screen-reader only' },
+                { title: 'Section label', note: 'page name + live count' },
+              ],
+            },
+            {
+              kind: 'band',
+              label: 'TODAY',
+              meta: 'leading story',
+              items: [
+                { title: 'Today heading', note: 'two lines, second italic' },
+                { title: 'Carousel', note: 'is-grid — today’s articles' },
+              ],
+            },
+            {
+              kind: 'grid',
+              label: '02 — NEWS HUB',
+              meta: 'three desks',
+              items: [
+                { title: 'Gaming', note: 'card + badge + count' },
+                { title: 'Cinema', note: 'card + badge + count' },
+                { title: 'Tech', note: 'card + badge + count' },
+              ],
+            },
+            {
+              kind: 'grid',
+              label: 'ARCHIVE',
+              meta: 'every story, paginated',
+              items: [
+                { title: 'Archive heading', note: 'two lines, second italic' },
+                { title: 'Story list' },
+                { title: 'Pagination' },
+              ],
+            },
+          ],
+          footer: ['Sections', 'Social', 'Legal', 'Newsletter'],
+        },
+        {
+          page: { en: 'Reviews', fr: 'Tests' },
+          job: {
+            en: 'Carry a long written test and a 90-second video verdict on the same page.',
+            fr: 'Porter un test écrit long et un verdict vidéo de 90 secondes sur la même page.',
+          },
+          url: 'let-s-play-nu.vercel.app/reviews',
+          intro: {
+            en: 'A review here is two formats at once: a written campaign test and a short-form video.',
+            fr: 'Un test ici, c’est deux formats à la fois : un test écrit de campagne et une vidéo courte.',
+          },
+          nav: ['Home', 'Actus', 'Communauté', 'Jeux', 'Quizz', 'Messages', 'Profil', 'Recherche'],
+          blocks: [
+            {
+              kind: 'split',
+              label: 'TEST ÉCRIT / À LA FEATURED',
+              meta: 'lead review',
+              items: [
+                { title: 'H1 — LE TEST DE CHAFT.', note: 'date · CAMPAGNE SOLO' },
+                { title: 'Verdict block', note: 'score + campaign summary' },
+              ],
+            },
+            {
+              kind: 'band',
+              label: 'SHORT REVIEW',
+              meta: 'YOUTUBE SHORTS · 90 SECONDS',
+              items: [
+                { title: 'Embedded short' },
+                { title: 'Points transcribed', note: 'the verdict, in text' },
+              ],
+            },
+            {
+              kind: 'grid',
+              label: 'FEATURED DOSSIERS',
+              meta: 'TCL × AYA NGAMEW · BLACK FLAG',
+              items: [
+                { title: 'Dossier 1' },
+                { title: 'Dossier 2' },
+                { title: 'Dossier 3' },
+              ],
+            },
+            {
+              kind: 'grid',
+              label: 'REVIEWS AS REELS',
+              meta: 'INSTAGRAM · LET’S PLAY OFFICIEL',
+              items: [
+                { title: 'Short verdict 1', note: '9:16' },
+                { title: 'Short verdict 2', note: '9:16' },
+                { title: 'Short verdict 3', note: '9:16' },
+              ],
+            },
+          ],
+          footer: ['Sections', 'Social', 'Legal', 'Newsletter'],
+        },
+        {
+          page: { en: 'Games', fr: 'Jeux' },
+          job: {
+            en: 'Turn three playable games into a shelf of physical objects.',
+            fr: 'Transformer trois jeux jouables en une étagère d’objets physiques.',
+          },
+          url: 'let-s-play-nu.vercel.app/jeu',
+          intro: {
+            en: 'The arcade index. Each game is a disc on a stage, one of them still sealed.',
+            fr: 'L’index de l’arcade. Chaque jeu est un disque sur scène, dont un encore scellé.',
+          },
+          nav: ['Home', 'Actus', 'Communauté', 'Jeux', 'Quizz', 'Messages', 'Profil', 'Recherche'],
+          blocks: [
+            {
+              kind: 'hero',
+              label: 'ARCADE HEADER',
+              meta: 'LET’S PLAY ARCADE · ALGERIA / GAMING',
+              items: [
+                { title: 'Eyebrow', note: 'live dot + label' },
+                { title: 'H2 — LET’S PLAY ARCADE.', note: 'second line italic' },
+              ],
+            },
+            {
+              kind: 'grid',
+              label: 'GAME SHELF',
+              meta: '4 discs',
+              items: [
+                { title: 'Mirage Rush', note: 'play ↗' },
+                { title: 'Vice City Rush', note: 'play ↗' },
+                { title: 'Le Sablier', note: 'play ↗' },
+                { title: 'Projet 03', note: 'soon — sealed' },
+              ],
+            },
+          ],
+          footer: ['Sections', 'Social', 'Legal', 'Newsletter'],
+        },
+        {
+          page: { en: 'Dossiers', fr: 'Dossiers' },
+          job: {
+            en: 'Give eight long-form pieces the weight of a magazine cover.',
+            fr: 'Donner à huit formats longs le poids d’une couverture de magazine.',
+          },
+          url: 'let-s-play-nu.vercel.app/dossiers',
+          intro: {
+            en: 'Long-form only. Every dossier is a cover, not a card — the typography does the work.',
+            fr: 'Du format long uniquement. Chaque dossier est une couverture, pas une carte — la typographie fait le travail.',
+          },
+          nav: ['Home', 'Actus', 'Communauté', 'Jeux', 'Quizz', 'Messages', 'Profil', 'Recherche'],
+          blocks: [
+            {
+              kind: 'grid',
+              label: 'PAGE / DOSSIERS',
+              meta: 'GO DEEPER · 8 covers',
+              items: [
+                { title: 'La PS2, la reine.' },
+                { title: 'Xbox 360, une génération.' },
+                { title: 'Le choc des générations.' },
+                { title: 'PlayStation, la révolution.' },
+                { title: 'Les jeux de l’année.' },
+                { title: 'Goya, le monde d’après.' },
+                { title: 'La culture se réunit.' },
+              ],
+            },
+            {
+              kind: 'band',
+              label: 'FEATURED FORMAT',
+              meta: 'THE SHOW',
+              items: [{ title: 'Pourquoi les Souls ?', note: 'long read' }],
+            },
+          ],
+          footer: ['Sections', 'Social', 'Legal', 'Newsletter'],
+        },
+        {
+          page: { en: 'Community', fr: 'Communauté' },
+          job: {
+            en: 'Make a reader into a player — groups, spotlight and messages in one room.',
+            fr: 'Faire d’un lecteur un joueur — groupes, spotlight et messages dans une seule pièce.',
+          },
+          url: 'let-s-play-nu.vercel.app/communaute',
+          intro: {
+            en: 'The social side. A hero that spotlights a group, then the workspace where groups live.',
+            fr: 'Le côté social. Un hero qui met un groupe en avant, puis l’espace de travail où vivent les groupes.',
+          },
+          nav: ['Home', 'Actus', 'Communauté', 'Jeux', 'Quizz', 'Messages', 'Profil', 'Recherche'],
+          blocks: [
+            {
+              kind: 'hero',
+              label: 'COMMUNITY HERO',
+              meta: 'spotlight',
+              items: [
+                { title: 'H1', note: 'two lines, second italic' },
+                { title: 'Spotlight group', note: 'name + members' },
+                { title: 'Empty state', note: 'two lines, second italic' },
+              ],
+            },
+            {
+              kind: 'split',
+              label: 'GROUPS WORKSPACE',
+              meta: 'community / talk',
+              items: [
+                { title: 'Groups grid', note: 'join, leave, create' },
+                { title: 'Create group', note: 'modal dialog' },
+              ],
+            },
+          ],
+          footer: ['Sections', 'Social', 'Legal', 'Newsletter'],
+        },
+        {
+          page: { en: 'Quizzes', fr: 'Quizz' },
+          job: {
+            en: 'Turn a daily five-minute habit into a leaderboard people come back for.',
+            fr: 'Faire d’un rituel quotidien de cinq minutes un classement où l’on revient.',
+          },
+          url: 'let-s-play-nu.vercel.app/quizz',
+          intro: {
+            en: 'A quiz index in two tiers: the daily set that renews, and Survival, which does not forgive.',
+            fr: 'Un index de quizz en deux étages : le set du jour qui se renouvelle, et Survival, qui ne pardonne pas.',
+          },
+          nav: ['Home', 'Actus', 'Communauté', 'Jeux', 'Quizz', 'Messages', 'Profil', 'Recherche'],
+          blocks: [
+            {
+              kind: 'hero',
+              label: 'QUIZ HEADER',
+              meta: 'section label + intro',
+              items: [
+                { title: 'H1', note: 'two lines, second italic' },
+                { title: 'Intro', note: 'quiz-intro' },
+              ],
+            },
+            {
+              kind: 'split',
+              label: 'DAILY QUIZ',
+              meta: 'one per day',
+              items: [
+                { title: 'Daily card', note: 'title, tag, meta, media' },
+                { title: 'Finished state', note: 'is-finished styling + hint' },
+              ],
+            },
+            {
+              kind: 'grid',
+              label: 'CATEGORY — MAIN',
+              meta: 'quiz grid',
+              items: [
+                { title: 'Quiz tile' },
+                { title: 'Quiz tile' },
+                { title: 'Quiz tile' },
+                { title: 'Quiz tile' },
+              ],
+            },
+            {
+              kind: 'band',
+              label: 'CATEGORY — SURVIVAL',
+              meta: '● REC · QUARANTINE',
+              items: [
+                { title: 'Survival card', note: 'hearts, infinity, tape' },
+                { title: '→ /quizz/survival' },
+              ],
+            },
+          ],
+          footer: ['Sections', 'Social', 'Legal', 'Newsletter'],
+        },
+        {
+          page: { en: 'Profile', fr: 'Profil' },
+          job: {
+            en: 'Make progress that survives a device change visible and worth looking at.',
+            fr: 'Rendre une progression qui survit au changement d’appareil visible et désirable.',
+          },
+          url: 'let-s-play-nu.vercel.app/profil',
+          intro: {
+            en: 'Per-player progression, read from Supabase. Achievements, consoles, badges.',
+            fr: 'La progression par joueur, lue depuis Supabase. Succès, consoles, badges.',
+          },
+          nav: ['Home', 'Actus', 'Communauté', 'Jeux', 'Quizz', 'Messages', 'Profil', 'Recherche'],
+          blocks: [
+            {
+              kind: 'hero',
+              label: 'PLAYER HEADER',
+              meta: 'gamertag + avatar',
+              items: [
+                { title: 'Gamertag', note: 'H1' },
+                { title: 'XP bar' },
+                { title: 'Not found state', note: 'profil introuvable' },
+              ],
+            },
+            {
+              kind: 'grid',
+              label: 'PLAYER SECTIONS',
+              meta: 'three panels',
+              items: [
+                { title: 'Succès & badges' },
+                { title: 'Mes consoles' },
+                { title: 'Stats' },
+              ],
+            },
+          ],
+          footer: ['Sections', 'Social', 'Legal', 'Newsletter'],
+        },
+      ],
       facts: [
         { label: { en: 'Editorial desks', fr: 'Desks éditoriaux' }, value: '4' },
         { label: { en: 'Articles / day', fr: 'Articles / jour' }, value: '9' },
