@@ -162,6 +162,10 @@ function Band({ block }: { block: WireBlock }) {
 export function WireframeView({ wire, lang }: { wire: Wireframe; lang: Lang }) {
   return (
     <div className="wf">
+      <div className="wf__title">
+        <span className="wf__pagename">{wire.page[lang]}</span>
+        <span className="wf__job">{wire.job[lang]}</span>
+      </div>
       <div className="wf__chrome">
         <span className="wf__dots" aria-hidden="true">
           <i /> <i /> <i />
@@ -195,3 +199,24 @@ export function WireframeView({ wire, lang }: { wire: Wireframe; lang: Lang }) {
     </div>
   );
 }
+
+/**
+ * A compact index of the pages documented for a product — each a jump link to
+ * its wireframe further down the page.
+ */
+export function WireframeIndex({ pages, lang }: { pages: Wireframe[]; lang: Lang }) {
+  const slug = (i: number) => `wf-${i}`;
+  return (
+    <nav className="wf-index" aria-label="Pages">
+      {pages.map((w, i) => (
+        <a className="wf-index__item" href={`#${slug(i)}`} key={w.url + i}>
+          <span className="wf-index__num">{String(i + 1).padStart(2, '0')}</span>
+          <span className="wf-index__name">{w.page[lang]}</span>
+          <span className="wf-index__job">{w.job[lang]}</span>
+        </a>
+      ))}
+    </nav>
+  );
+}
+
+export const wireframeAnchor = (i: number) => `wf-${i}`;

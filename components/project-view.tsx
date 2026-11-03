@@ -8,7 +8,7 @@ import { T } from '@/lib/i18n';
 import type { Lang } from '@/lib/i18n';
 import { asset } from '@/lib/asset';
 import { EffectIcon } from '@/components/effect-icon';
-import { WireframeView } from '@/components/wireframe';
+import { WireframeView, WireframeIndex, wireframeAnchor } from '@/components/wireframe';
 import { ArrowUpRight, GitHub, Globe } from './icons';
 import { Reveal } from './reveal';
 
@@ -298,19 +298,32 @@ export function ProjectView({ project, next }: { project: Project; next: Project
         </section>
       )}
 
-      {d.wireframe && (
-        <section className="section">
-          <div className="container">
-            <div className="head">
-              <div className="head__copy">
-                <span className="eyebrow">{T.project.wireframe[lang]}</span>
+      {d.wireframes && d.wireframes.length > 0 && (
+        <>
+          <section className="section">
+            <div className="container">
+              <div className="head">
+                <div className="head__copy">
+                  <span className="eyebrow">{T.project.wireframe[lang]}</span>
+                  <p className="game__pitch">{T.project.wireframeLead[lang]}</p>
+                </div>
               </div>
+              <Reveal>
+                <WireframeIndex pages={d.wireframes} lang={lang} />
+              </Reveal>
             </div>
-            <Reveal>
-              <WireframeView wire={d.wireframe} lang={lang} />
-            </Reveal>
-          </div>
-        </section>
+          </section>
+
+          {d.wireframes.map((w, i) => (
+            <section className="section section--tight" id={wireframeAnchor(i)} key={w.url + i}>
+              <div className="container">
+                <Reveal>
+                  <WireframeView wire={w} lang={lang} />
+                </Reveal>
+              </div>
+            </section>
+          ))}
+        </>
       )}
 
       {d.gallery && d.gallery.length > 0 && (
