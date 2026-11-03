@@ -3,11 +3,50 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLang } from '@/app/providers';
-import type { Project } from '@/content/site';
+import type { Project, ShowcaseCard } from '@/content/site';
 import { T } from '@/lib/i18n';
+import type { Lang } from '@/lib/i18n';
 import { asset } from '@/lib/asset';
+import { EffectIcon } from '@/components/effect-icon';
 import { ArrowUpRight, GitHub, Globe } from './icons';
 import { Reveal } from './reveal';
+
+/** A real card from the game, drawn as the game draws it: art, frame, cost, stats. */
+function SpecimenCard({ card, lang }: { card: ShowcaseCard; lang: Lang }) {
+  return (
+    <article className={`spec-card spec-card--${card.element}`}>
+      <div className="spec-card__art">
+        <Image
+          src={asset(card.art)}
+          alt={card.name}
+          width={760}
+          height={760}
+          sizes="(max-width: 680px) 45vw, 220px"
+        />
+        <span className="spec-card__cost">{card.cost}</span>
+      </div>
+      <div className="spec-card__body">
+        <h3 className="spec-card__name">{card.name}</h3>
+        <p className="spec-card__type">{card.typeLine}</p>
+        <p className="spec-card__text">{card.text[lang]}</p>
+        <div className="spec-card__foot">
+          {card.keywords.length > 0 && (
+            <span className="spec-card__kw">
+              {card.keywords.map((k) => (
+                <EffectIcon key={k} id={k} size={13} />
+              ))}
+            </span>
+          )}
+          {card.atk !== undefined && (
+            <span className="spec-card__stats">
+              {card.atk}/{card.def}
+            </span>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export function ProjectView({ project, next }: { project: Project; next: Project }) {
   const { lang } = useLang();
@@ -128,7 +167,10 @@ export function ProjectView({ project, next }: { project: Project; next: Project
                 <div className="game__rules">
                   {d.game.mechanics.map((m, i) => (
                     <Reveal as="article" className="game__rule" key={m.name.en} delay={i * 40}>
-                      <h3 className="game__rule-name">{m.name[lang]}</h3>
+                      <h3 className="game__rule-name">
+                        {m.icon && <EffectIcon id={m.icon} size={15} className="game__rule-icon" />}
+                        {m.name[lang]}
+                      </h3>
                       <p>{m.body[lang]}</p>
                     </Reveal>
                   ))}
@@ -136,6 +178,55 @@ export function ProjectView({ project, next }: { project: Project; next: Project
               </div>
             </div>
           </section>
+
+          {d.game.showcase && d.game.showcase.length > 0 && (
+            <section className="section">
+              <div className="container">
+                <div className="head">
+                  <div className="head__copy">
+                    <span className="eyebrow">{T.project.gameCards[lang]}</span>
+                    <p className="game__pitch">{T.project.gameCardsLead[lang]}</p>
+                  </div>
+                </div>
+                <div className="spec-grid">
+                  {d.game.showcase.map((c, i) => (
+                    <Reveal key={c.name} delay={i * 40}>
+                      <SpecimenCard card={c} lang={lang} />
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {d.game.colours && d.game.colours.length > 0 && (
+            <section className="section">
+              <div className="container">
+                <div className="head">
+                  <div className="head__copy">
+                    <span className="eyebrow">{T.project.gameColours[lang]}</span>
+                    <p className="game__pitch">{T.project.gameColoursLead[lang]}</p>
+                  </div>
+                </div>
+                <div className="colour-wheel">
+                  {d.game.colours.map((c, i) => (
+                    <Reveal as="article" className={`colour colour--${c.id}`} key={c.id} delay={i * 40}>
+                      <div className="colour__art">
+                        <Image src={asset(c.art)} alt="" width={480} height={480} sizes="20vw" />
+                      </div>
+                      <div className="colour__meta">
+                        <span className="colour__name">{c.name[lang]}</span>
+                        <span className="colour__count">
+                          {c.count} {T.project.gameCreatures[lang]}
+                        </span>
+                        <p className="colour__note">{c.note[lang]}</p>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
 
           <section className="section">
             <div className="container">
@@ -146,7 +237,10 @@ export function ProjectView({ project, next }: { project: Project; next: Project
                 <div className="game__modes">
                   {d.game.modes.map((m, i) => (
                     <Reveal as="article" className="game__mode" key={m.title.en} delay={i * 50}>
-                      <h3 className="h3">{m.title[lang]}</h3>
+                      <h3 className="h3">
+                        {m.icon && <EffectIcon id={m.icon} size={17} className="game__mode-icon" />}
+                        {m.title[lang]}
+                      </h3>
                       <p>{m.body[lang]}</p>
                     </Reveal>
                   ))}

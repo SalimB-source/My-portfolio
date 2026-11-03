@@ -54,12 +54,31 @@ export type Category = 'product' | 'games' | 'brand';
 export type DetailBlock = {
   title: { en: string; fr: string };
   body: { en: string; fr: string };
+  /** Id into `lib/effect-icons.ts` — the game's own icon set. */
+  icon?: string;
 };
 
 /** One named rule of the combat system. */
 export type Mechanic = {
   name: { en: string; fr: string };
   body: { en: string; fr: string };
+  /** Id into `lib/effect-icons.ts` — the game's own icon set. */
+  icon?: string;
+};
+
+/** A real card from the game, shown as a specimen. */
+export type ShowcaseCard = {
+  name: string;
+  art: string;
+  element: 'sable' | 'braise' | 'eau' | 'neige' | 'tenebres';
+  cost: number;
+  atk?: number;
+  def?: number;
+  rarity: string;
+  typeLine: string;
+  text: { en: string; fr: string };
+  /** Keyword ids to badge the card with. */
+  keywords: string[];
 };
 
 /** The "the game itself" section of a playable project. */
@@ -70,6 +89,10 @@ export type GameDetail = {
   concept: DetailBlock[];
   mechanics: Mechanic[];
   modes: DetailBlock[];
+  /** Real cards, three per row, to show the system rather than describe it. */
+  showcase?: ShowcaseCard[];
+  /** The colour wheel, with a real card art behind each colour. */
+  colours?: { id: string; name: { en: string; fr: string }; count: number; art: string; note: { en: string; fr: string } }[];
 };
 
 export type Project = {
@@ -193,122 +216,261 @@ export const PROJECTS: Project[] = [
     detail: {
       game: {
         pitch: {
-          en: 'A turn-based card duel set in Bab El, a nine-storey city built on a sealed gate above a rising desert. Every cycle, the Astrolabe sounds and the lowest floor is taken back by the sand.',
-          fr: 'Un duel de cartes au tour par tour dans Bab El, ville de neuf étages bâtie sur un portail scellé, au-dessus d’un désert qui monte. À chaque cycle, l’Astrolabe sonne et l’étage le plus bas est repris par le sable.',
+          en: 'A collectible card duel in Bab El, the nine-storey city built on a sealed gate. Two sorcerers, twenty-five life each, five colours of mana and a table that fills with creatures, weapons and spells.',
+          fr: 'Un duel de cartes à collectionner dans Bab El, la ville de neuf étages bâtie sur un portail scellé. Deux sorciers, vingt-cinq points de vie chacun, cinq couleurs de mana et une table qui se remplit de créatures, d’armes et de sorts.',
         },
         specs: [
           {
             label: { en: 'Genre', fr: 'Genre' },
-            value: { en: 'Tactical card RPG', fr: 'RPG tactique de cartes' },
+            value: { en: 'Collectible card duel', fr: 'Duel de cartes à collectionner' },
+          },
+          {
+            label: { en: 'Cards', fr: 'Cartes' },
+            value: { en: '191 playable', fr: '191 jouables' },
+          },
+          {
+            label: { en: 'Colours', fr: 'Couleurs' },
+            value: { en: '5 elements', fr: '5 éléments' },
           },
           {
             label: { en: 'Format', fr: 'Format' },
-            value: { en: 'Solo campaign, 1v1 online', fr: 'Campagne solo, 1c1 en ligne' },
-          },
-          {
-            label: { en: 'Deck', fr: 'Deck' },
-            value: { en: '40 cards', fr: '40 cartes' },
-          },
-          {
-            label: { en: 'Platforms', fr: 'Plateformes' },
-            value: { en: 'Browser, landscape phone', fr: 'Navigateur, téléphone en paysage' },
+            value: { en: 'Solo towers, 1v1 online', fr: 'Tours solo, 1c1 en ligne' },
           },
         ],
         concept: [
           {
-            title: { en: 'The city that counts its floors', fr: 'La ville qui compte ses étages' },
+            title: { en: 'A Magic-shaped duel, in an Algerian city', fr: 'Un duel façon Magic, dans une ville algérienne' },
             body: {
-              en: 'Bab El was built around a gate nobody opens. Nine floors, tramways of copper, suspended souks, a sky-clock — the Astrolabe — that does not tell the time but counts the cycles left. Floor one is already gone; the story starts at floor four. Everyone knows, and everyone keeps living.',
-              fr: 'Bab El a été bâtie autour d’un portail que personne n’ouvre. Neuf étages, des tramways de cuivre, des souks suspendus, une horloge céleste — l’Astrolabe — qui ne donne pas l’heure mais compte les cycles restants. L’étage un est déjà perdu ; l’histoire commence au quatrième. Tout le monde le sait, et tout le monde continue de vivre.',
+              en: 'Each player is a sorcerer with twenty-five life and a five-card opening hand. You play one terrain a turn, terrains produce coloured mana, creatures arrive with summoning sickness and the defender chooses his blockers. The structure is deliberately legible to anyone who has ever held a Magic deck — the world on top of it is entirely Bab El.',
+              fr: 'Chaque joueur est un sorcier avec vingt-cinq points de vie et une main de cinq cartes. On pose un terrain par tour, les terrains produisent du mana coloré, les créatures arrivent avec le mal d’invocation et le défenseur choisit ses bloqueurs. La structure est volontairement lisible pour qui a déjà tenu un deck Magic — le monde par-dessus, lui, est entièrement Bab El.',
             },
           },
           {
-            title: { en: 'The villain is an administration', fr: 'Le méchant est une administration' },
+            title: { en: 'Five towers, five colours', fr: 'Cinq tours, cinq couleurs' },
             body: {
-              en: 'The Chambre des Heures does not worship anything — it calculates, publishes and evacuates. Each cycle it posts the Liste: which districts are a priority, and which are not. Its agents carry registers, not weapons. The Grand Horloger is gentle, polite and has signed the Liste his whole life. He is not the evil; he is the question.',
-              fr: 'La Chambre des Heures ne voue aucun culte : elle calcule, publie et évacue. À chaque cycle elle affiche la Liste — les quartiers prioritaires, et les autres. Ses agents portent des registres, pas des armes. Le Grand Horloger est doux, poli, et a signé la Liste toute sa vie. Il n’est pas le mal : il est la question.',
+              en: 'Sable, Braise, Eau, Neige and Ténèbres. Each colour has its own Tower — a terrain card — and its own temperament: Sable is the most populated with thirty-five creatures, Eau the most restrained with twelve. Decks are built around these colours, and the game ships with archetypes ready to play as well as a workshop to build your own.',
+              fr: 'Sable, Braise, Eau, Neige et Ténèbres. Chaque couleur a sa Tour — une carte terrain — et son tempérament : le Sable est le plus peuplé avec trente-cinq créatures, l’Eau le plus mesuré avec douze. Les decks se construisent autour de ces couleurs, et le jeu livre des archétypes prêts à jouer comme un atelier pour bâtir les siens.',
             },
           },
           {
-            title: { en: 'The lie at the centre', fr: 'Le mensonge au centre' },
+            title: { en: 'The Chambre des Heures', fr: 'La Chambre des Heures' },
             body: {
-              en: 'The gate is not broken. It is locked from the inside. What is happening to Bab El is not a disaster it suffers but a quarantine it maintains without knowing — and the Horloger is the ninth of a line of people who know and say nothing, because panic costs more lives than sand does.',
-              fr: 'Le portail n’est pas cassé : il est verrouillé de l’intérieur. Ce qui arrive à Bab El n’est pas une catastrophe qu’elle subit mais une quarantaine qu’elle entretient sans le savoir — et le Horloger est le neuvième d’une lignée de gens qui savent et se taisent, parce que la panique coûte plus de vies que le sable.',
+              en: 'Above the duel, the fiction holds: Bab El counts its floors and an administration signs which ones are lost. The towers of the story mode are its bureaucracy made playable — each floor is a sorcerer with his own deck, his own AI profile and his own temperament, and the top of each tower is a Grand Horloger.',
+              fr: 'Au-dessus du duel, la fiction tient : Bab El compte ses étages et une administration signe lesquels sont perdus. Les tours du mode Histoire sont sa bureaucratie rendue jouable — chaque étage est un sorcier avec son deck, son profil d’IA et son tempérament, et le sommet de chaque tour est un Grand Horloger.',
             },
           },
         ],
         mechanics: [
           {
-            name: { en: 'No reflexes, only decisions', fr: 'Aucun réflexe, seulement des décisions' },
+            name: { en: 'Six phases, one attack', fr: 'Six phases, une attaque' },
+            icon: 'coup-rapide',
             body: {
-              en: 'Every enemy announces its action one round ahead — icon, move, target, estimated damage. Nothing lands unannounced. The tension comes from what you know, not from what you fail to time, and a loss is never a surprise.',
-              fr: 'Chaque ennemi annonce son action un round à l’avance — icône, coup, cible, dégâts estimés. Rien n’arrive sans avoir été annoncé. La tension vient de ce qu’on sait, pas de ce qu’on rate, et une défaite n’est jamais une surprise.',
+              en: 'A turn runs début, principale, attaque, blocage, principale2, fin. The active player declares all of his attackers at once; the defender then assigns blockers, and both sides may play quick spells before damage resolves. Creatures that attacked stay tapped.',
+              fr: 'Un tour se déroule début, principale, attaque, blocage, principale2, fin. Le joueur actif déclare tous ses attaquants d’un coup ; le défenseur assigne ensuite ses bloqueurs, et les deux camps peuvent lancer des magies rapides avant que les blessures ne tombent. Les créatures qui ont attaqué restent engagées.',
             },
           },
           {
-            name: { en: 'Four answers, all chosen', fr: 'Quatre réponses, toutes choisies' },
+            name: { en: 'Résonance — the type matters', fr: 'Résonance — le type compte' },
+            icon: 'resonance',
             body: {
-              en: 'Guard cuts the next hit by 60 %. A glass barrage absorbs damage until it breaks. A counter-element spell strikes the attacker with the element that beats theirs, halving the blow and adding Fêlure. Repositioning moves you up a floor, out of a zone. Each costs one of three action points, so guarding is a real sacrifice.',
-              fr: 'La Garde coupe le prochain coup de 60 %. Un barrage de verre absorbe les dégâts jusqu’à se briser. Un contre-élément frappe l’attaquant avec l’élément qui bat le sien : coup réduit de moitié et Fêlure en plus. Se repositionner fait monter d’un étage, hors de la zone. Chacune coûte un des trois points d’action : garder est un vrai sacrifice.',
+              en: 'Some creatures carry a Résonance: while they are on the table, every creature of that printed type gains a bonus — and the bonus applies to both camps. The Shogun promu gives every Samouraï, including the opponent’s, +1/+1. It is a keyword that changes how you build a deck rather than how you play one card.',
+              fr: 'Certaines créatures portent une Résonance : tant qu’elles sont en jeu, toutes les créatures de ce type imprimé gagnent un bonus — et le bonus s’applique aux deux camps. Le Shogun promu donne +1/+1 à tous les Samouraïs, y compris ceux de l’adversaire. C’est un mot-clé qui change la construction du deck plus que le jeu d’une carte.',
             },
           },
           {
-            name: { en: 'Sand is the second health bar', fr: 'Le sable est la seconde barre de vie' },
+            name: { en: 'Aura — position on the table', fr: 'Aura — la position sur la table' },
+            icon: 'aura',
             body: {
-              en: 'Half of every wound falls to the ground and stays there, on the owner’s side of the board. Harvest it to heal, blow it away from an enemy before they heal on it, or let it pile up to pay for the biggest spells. The same fight can cost everyone 500 HP or 200.',
-              fr: 'La moitié de chaque blessure tombe au sol et y reste, du côté de sa victime. On la récolte pour se soigner, on la souffle à l’ennemi avant qu’il ne s’en soigne, ou on la laisse s’accumuler pour payer les plus gros sorts. Le même combat peut coûter 500 PV à tout le monde ou 200.',
+              en: 'An Aura only buffs adjacent creatures. Kenshi de la forge gives +1/+0 to the creatures next to him, whatever their type — so where you place a card physically matters. Placement is part of the rules, not decoration.',
+              fr: 'Une Aura ne renforce que les créatures adjacentes. Kenshi de la forge donne +1/+0 aux créatures voisines, quel que soit leur type — l’endroit où l’on pose une carte compte donc physiquement. Le placement fait partie des règles, pas de la décoration.',
             },
           },
           {
-            name: { en: 'The staircase arena', fr: 'L’arène en escalier' },
+            name: { en: 'Harakiri — dying is a weapon', fr: 'Harakiri — mourir est une arme' },
+            icon: 'honneur',
             body: {
-              en: 'Combat happens across three floors. Striking from above adds 15 % damage per floor; being struck from above shaves 5 % per floor. Everyone slides down one floor each round, and dropping an enemy from the third to the first triggers La Chute at ×1.4. Height is a resource that melts.',
-              fr: 'Le combat se joue sur trois étages. Frapper d’en haut ajoute 15 % de dégâts par étage ; être frappé d’en haut en retire 5 % par étage. Tout le monde descend d’un étage à chaque round, et faire chuter un ennemi du troisième au premier déclenche La Chute à ×1,4. La hauteur est une ressource qui fond.',
+              en: 'Ten creatures carry Harakiri: when they die, they deal damage to a random enemy creature, or to the enemy sorcerer if the table is empty. Losing a creature is never a purely defensive event — it is a delayed hit you already paid for.',
+              fr: 'Dix créatures portent le Harakiri : quand elles meurent, elles infligent des dégâts à une créature adverse au hasard, ou au sorcier adverse si la table est vide. Perdre une créature n’est jamais un événement purement défensif — c’est un coup différé, déjà payé.',
             },
           },
           {
-            name: { en: 'Verre, Fêlure, Consonance', fr: 'Verre, Fêlure, Consonance' },
+            name: { en: 'Furie, Esquive, Envol', fr: 'Furie, Esquive, Envol' },
+            icon: 'furie',
             body: {
-              en: 'Three glass tokens — earned by guarding the announced target, landing a counter-element, or a Consonance — crystallise a skill at double power. Fêlure builds on each enemy until it cracks: it stops acting, takes double damage and the next skill is free. Consonance rewards using three different elements in one round with ×1.5.',
-              fr: 'Trois jetons de verre — gagnés en gardant la cible annoncée, en réussissant un contre-élément ou une Consonance — cristallisent une compétence à puissance double. La Fêlure monte sur chaque ennemi jusqu’à le fendre : il n’agit plus, subit ×2 et la compétence suivante est gratuite. La Consonance récompense trois éléments différents dans un round par ×1,5.',
+              en: 'Furie (nine creatures): the illustration takes over the whole card and the stats change with it. Esquive: a 25 % chance to ignore an attack, a spell or a sorcery — but never a capacity. Envol: it can only be blocked by another creature with Envol. Each keyword has its own visual state on the table.',
+              fr: 'Furie (neuf créatures) : l’illustration envahit toute la carte et les statistiques changent avec elle. Esquive : 25 % de chances d’ignorer une attaque, une magie ou une sorcellerie — mais jamais une capacité. Envol : seule une autre créature avec Envol peut la bloquer. Chaque mot-clé a son propre état visuel sur la table.',
             },
           },
           {
-            name: { en: 'The Astrolabe as a clock', fr: 'L’Astrolabe comme horloge' },
+            name: { en: 'Life is a reserve, not a ceiling', fr: 'La vie est une réserve, pas un plafond' },
+            icon: 'soin',
             body: {
-              en: 'A visible counter runs during the fight. Every five rounds it sounds: every enemy gains 20 % attack for two rounds and everyone drops an extra floor. Long fights get harder with time, exactly as the city does.',
-              fr: 'Un compteur visible tourne pendant le combat. Toutes les cinq manches, il sonne : tous les ennemis gagnent 20 % d’attaque pendant deux rounds et tout le monde descend d’un étage de plus. Les combats longs durcissent avec le temps, exactement comme la ville.',
+              en: 'Everyone starts at twenty-five, but twenty-five is not a maximum. Any healing, Tribut or transfer that would take you above your current maximum raises the maximum instead: the reserve widens and the gain is kept. A long game against a black deck can push a sorcerer well past thirty.',
+              fr: 'Tout le monde part à vingt-cinq, mais vingt-cinq n’est pas un maximum. Tout soin, Tribut ou transfert qui dépasserait le maximum courant fait monter ce maximum : la réserve s’élargit et le gain est conservé. Une longue partie contre un deck Ténèbres peut pousser un sorcier bien au-delà de trente.',
             },
           },
         ],
         modes: [
           {
-            title: { en: 'Story — the Towers of Bab El', fr: 'Histoire — les Tours de Bab El' },
+            title: { en: 'Story — the towers', fr: 'Histoire — les tours' },
+            icon: 'traque',
             body: {
-              en: 'You climb towers floor by floor. Each floor is held by a sorcerer of the Chambre des Heures with their own deck, personality and AI profile; the top is a Grand Horloger. Progress carries between floors, and nothing is ever gated behind grinding. Ten towers and forty-three floors so far — the Listes, the Souk, the Abysses, the Fjord — each leaning on its own colour.',
-              fr: 'On gravit des tours étage par étage. Chaque étage est tenu par un sorcier de la Chambre des Heures, avec son deck, sa personnalité et son profil d’IA ; le sommet est un Grand Horloger. La progression se conserve entre les étages, et rien n’est verrouillé derrière du farm. Dix tours et quarante-trois étages à ce jour — les Listes, le Souk, les Abysses, le Fjord — chacune appuyée sur sa propre couleur.',
+              en: 'Ten towers and forty-three floors. Each floor is held by a sorcerer with his own deck, AI profile and difficulty; the top of a tower is a Grand Horloger. Progress carries between floors and nothing is ever gated behind grinding — the difficulty of a floor comes from the deck across the table, not from a stat bonus.',
+              fr: 'Dix tours et quarante-trois étages. Chaque étage est tenu par un sorcier avec son deck, son profil d’IA et sa difficulté ; le sommet d’une tour est un Grand Horloger. La progression se conserve entre les étages et rien n’est verrouillé derrière du farm — la difficulté d’un étage vient du deck d’en face, pas d’un bonus de statistiques.',
             },
           },
           {
-            title: { en: 'Online 1v1 — challenge by link', fr: '1c1 en ligne — défi par lien' },
+            title: { en: 'Online 1v1 — by invitation', fr: '1c1 en ligne — par invitation' },
+            icon: 'lien',
             body: {
-              en: 'A duel is launched by a clickable invitation rather than a waiting queue: two players, any hour, resumable — the right shape for a turn-based game with no reflexes. Because each hand and draw order is secret, a single referee holds the only true copy of the game and sends each player a filtered view.',
-              fr: 'Un duel se lance par une invitation cliquable plutôt que par une file d’attente : deux joueurs, n’importe quelle heure, reprenable — la bonne forme pour un jeu au tour par tour sans réflexes. Chaque main et chaque ordre de pioche étant secrets, un arbitre unique détient la seule copie vraie de la partie et renvoie à chacun une vue filtrée.',
+              en: 'A duel starts from a clickable challenge link rather than a matchmaking queue: two players, any hour, resumable. Because each hand and draw order is secret, a single referee holds the only true copy of the game and sends each player a filtered view of the table.',
+              fr: 'Un duel démarre depuis un lien de défi cliquable plutôt que depuis une file d’attente : deux joueurs, n’importe quelle heure, reprenable. Chaque main et chaque ordre de pioche étant secrets, un arbitre unique détient la seule copie vraie de la partie et renvoie à chacun une vue filtrée de la table.',
             },
           },
           {
-            title: { en: 'Decks — the shelf and the workshop', fr: 'Decks — l’étagère et l’atelier' },
+            title: { en: 'The deck shelf and the workshop', fr: 'L’étagère de decks et l’atelier' },
+            icon: 'pioche',
             body: {
-              en: 'Decks are 3D boxes on a shelf; a box opens to reveal its cards, and the one you select is remembered on the device. The workshop builds new boxes two ways: assisted (answer two questions about colour and play style) or manual. Home-made decks are labelled DECK MAISON and sync by account.',
-              fr: 'Les decks sont des boîtiers 3D sur une étagère ; un boîtier s’ouvre pour révéler ses cartes, et celui qu’on sélectionne est mémorisé sur l’appareil. L’atelier fabrique de nouveaux boîtiers de deux façons : assistée (deux questions sur la couleur et le style de jeu) ou manuelle. Les decks maison portent l’étiquette DECK MAISON et se synchronisent par compte.',
+              en: 'Decks are boxes on a shelf; opening one reveals its cards, and the one you select is remembered on the device. The workshop builds new decks two ways — assisted, by answering two questions about colour and play style, or manual. Home-made decks are labelled and sync by account.',
+              fr: 'Les decks sont des boîtiers sur une étagère ; en ouvrir un révèle ses cartes, et celui qu’on sélectionne est mémorisé sur l’appareil. L’atelier fabrique de nouveaux decks de deux façons — assistée, en répondant à deux questions sur la couleur et le style de jeu, ou manuelle. Les decks maison sont étiquetés et se synchronisent par compte.',
             },
           },
           {
             title: { en: 'The Souk and the collection', fr: 'Le Souk et la collection' },
+            icon: 'butin',
             body: {
-              en: 'Credits earned by playing — daily quests, wins, first clears — buy five-card boosters. Nothing is ever paid for with real money, a booster never skips the pacing of the towers, and nothing earned ever goes backwards. Player XP adds a third currency: each level crossed opens a free booster.',
-              fr: 'Les crédits gagnés en jouant — quêtes du jour, victoires, premières victoires d’un étage — achètent des boosters de cinq cartes. Rien ne se paie avec de l’argent réel, un booster ne court-circuite jamais le rythme des tours, et rien d’acquis ne redescend. L’XP ajoute une troisième monnaie : chaque niveau franchi ouvre un booster offert.',
+              en: 'Credits earned by playing — daily quests, wins, first clears — buy five-card boosters. Nothing is ever paid for with real money, a booster never skips the pacing of the towers, and nothing acquired ever goes backwards. Player XP adds a third currency: each level crossed opens a free booster.',
+              fr: 'Les crédits gagnés en jouant — quêtes du jour, victoires, premières victoires — achètent des boosters de cinq cartes. Rien ne se paie avec de l’argent réel, un booster ne court-circuite jamais le rythme des tours, et rien d’acquis ne redescend. L’XP ajoute une troisième monnaie : chaque niveau franchi ouvre un booster offert.',
             },
+          },
+        ],
+        showcase: [
+          {
+            name: 'Shogun promu',
+            art: '/images/sablier/cards/samourai-du-torii.jpg',
+            element: 'braise',
+            cost: 4,
+            atk: 2,
+            def: 2,
+            rarity: 'rare',
+            typeLine: 'Créature — Humain · Samouraï',
+            text: {
+              en: 'Résonance samouraï — while it is on the table, every Samouraï creature, in both camps, gains +1/+1. Harakiri — when it dies, it deals 1 damage to a random enemy creature, or to the enemy sorcerer if there is none.',
+              fr: 'Résonance samouraï — tant qu’il est en jeu, toutes les créatures Samouraï de la table, lui compris, dans les deux camps, gagnent +1/+1. Harakiri — quand cette créature meurt, elle inflige 1 dégât à une créature adverse choisie au hasard, ou au sorcier adverse s’il n’y en a aucune.',
+            },
+            keywords: ['resonance', 'honneur'],
+          },
+          {
+            name: 'Kenshi de la forge',
+            art: '/images/sablier/cards/kenshi-de-la-forge.jpg',
+            element: 'braise',
+            cost: 3,
+            atk: 1,
+            def: 2,
+            rarity: 'rare',
+            typeLine: 'Créature — Humain · Samouraï',
+            text: {
+              en: 'While it is on the table, your adjacent creatures gain +1/+0, whatever their type. Harakiri — when it dies, it deals 1 damage to a random enemy creature.',
+              fr: 'Tant qu’il est en jeu, vos créatures adjacentes gagnent +1/+0, quel que soit leur type. Harakiri — quand cette créature meurt, elle inflige 1 dégât à une créature adverse choisie au hasard.',
+            },
+            keywords: ['aura', 'honneur'],
+          },
+          {
+            name: 'Susanoo',
+            art: '/images/sablier/cards/susanoo.jpg',
+            element: 'braise',
+            cost: 6,
+            atk: 5,
+            def: 3,
+            rarity: 'mythique',
+            typeLine: 'Créature légendaire — Kami · Tempête',
+            text: {
+              en: 'When Susanoo enters play, remove from the game a creature of cost 5 or more of your choice. Harakiri — when it dies, it deals 1 damage to a random enemy creature.',
+              fr: 'Quand Susanoo arrive en jeu, retirez de la partie une créature de coût 5 ou plus de votre choix. Harakiri — quand cette créature meurt, elle inflige 1 dégât à une créature adverse choisie au hasard.',
+            },
+            keywords: ['honneur'],
+          },
+          {
+            name: 'Sentinelle des sables',
+            art: '/images/sablier/cards/sentinelle-des-sables.jpg',
+            element: 'sable',
+            cost: 3,
+            atk: 3,
+            def: 2,
+            rarity: 'inhabituelle',
+            typeLine: 'Créature — Humain et Vampire',
+            text: {
+              en: 'You may play this creature during the opponent’s attack phase. When it enters, it deals its attack damage to a targeted attacking creature.',
+              fr: 'Vous pouvez jouer cette créature pendant la phase d’attaque adverse. Quand elle arrive : elle inflige ses dégâts d’attaque à une créature attaquante ciblée.',
+            },
+            keywords: ['contre-attaque', 'vol-de-vie'],
+          },
+          {
+            name: 'Le Kraken',
+            art: '/images/sablier/cards/kraken.jpg',
+            element: 'eau',
+            cost: 8,
+            atk: 8,
+            def: 8,
+            rarity: 'mythique',
+            typeLine: 'Créature légendaire — Bête marine',
+            text: {
+              en: 'When Le Kraken enters play, it destroys a targeted enemy creature of type Navire.',
+              fr: 'Quand Le Kraken arrive : il détruit une créature adverse de type Navire ciblée.',
+            },
+            keywords: [],
+          },
+          {
+            name: 'Loup des neiges',
+            art: '/images/sablier/cards/loup-des-neiges.jpg',
+            element: 'neige',
+            cost: 2,
+            atk: 2,
+            def: 2,
+            rarity: 'commune',
+            typeLine: 'Créature — Bête',
+            text: {
+              en: 'Furie — when its condition is met, the illustration takes over the whole card and its statistics change with it.',
+              fr: 'Furie — quand sa condition est remplie, l’illustration envahit toute la carte et ses statistiques changent avec elle.',
+            },
+            keywords: ['furie'],
+          },
+        ],
+        colours: [
+          {
+            id: 'sable',
+            name: { en: 'Sand', fr: 'Sable' },
+            count: 35,
+            art: '/images/sablier/cards/general-du-croissant-noir.jpg',
+            note: { en: 'The most populated colour — the desert, its beasts and its dead.', fr: 'La couleur la plus peuplée — le désert, ses bêtes et ses morts.' },
+          },
+          {
+            id: 'braise',
+            name: { en: 'Ember', fr: 'Braise' },
+            count: 24,
+            art: '/images/sablier/cards/susanoo.jpg',
+            note: { en: 'Samurai, kami and storms — the colour of Harakiri.', fr: 'Samouraïs, kamis et tempêtes — la couleur du Harakiri.' },
+          },
+          {
+            id: 'tenebres',
+            name: { en: 'Darkness', fr: 'Ténèbres' },
+            count: 19,
+            art: '/images/sablier/cards/la-barbe-noire.jpg',
+            note: { en: 'Pirates and curses, and the only colour that steals life.', fr: 'Pirates et malédictions, la seule couleur qui vole la vie.' },
+          },
+          {
+            id: 'neige',
+            name: { en: 'Snow', fr: 'Neige' },
+            count: 14,
+            art: '/images/sablier/cards/loup-des-neiges.jpg',
+            note: { en: 'The fjord, its jarls and their forge.', fr: 'Le fjord, ses jarls et leur forge.' },
+          },
+          {
+            id: 'eau',
+            name: { en: 'Water', fr: 'Eau' },
+            count: 12,
+            art: '/images/sablier/cards/kraken.jpg',
+            note: { en: 'The rarest and slowest — the sea, patient and enormous.', fr: 'La plus rare et la plus lente — la mer, patiente et énorme.' },
           },
         ],
       },
