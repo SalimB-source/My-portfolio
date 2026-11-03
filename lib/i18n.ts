@@ -17,7 +17,7 @@ export const T = {
     langLabel: { en: 'Switch language', fr: 'Changer de langue' },
   },
   hero: {
-    eyebrow: { en: 'Algiers · available for Canada', fr: 'Alger · disponible pour le Canada' },
+    eyebrow: { en: 'Algiers · seeking a role in Canada', fr: 'Alger · en recherche d’un poste au Canada' },
     titleA: { en: 'I design brands,', fr: 'Je dessine des marques,' },
     titleB: { en: 'then I build them', fr: 'puis je les construis' },
     titleC: { en: 'for the web.', fr: 'pour le web.' },
@@ -203,8 +203,8 @@ export const T = {
     },
     eligibility: { en: 'Eligibility', fr: 'Éligibilité' },
     eligibilityText: {
-      en: 'Algerian citizen — open to relocation to Canada and to employer-supported work permit. Passport valid, no criminal record, available within 2 months.',
-      fr: 'Citoyen algérien — ouvert à une relocalisation au Canada et à un permis de travail soutenu par l’employeur. Passeport valide, casier vierge, disponible sous 2 mois.',
+      en: 'Algerian citizen. Targeting the Atlantic Immigration Program and the Francophone Community Immigration Pilot — both employer-driven, both requiring an offer from a designated employer. French native, English professional; art direction and front-end development both on several published priority lists.',
+      fr: 'Citoyen algérien. Ciblage du Programme d’immigration au Canada atlantique et du Volet des collectivités francophones — tous deux pilotés par l’employeur et exigeant une offre d’un employeur désigné. Français langue maternelle, anglais professionnel ; direction artistique et développement front-end figurent sur plusieurs listes de métiers prioritaires publiées.',
     },
   },
   contact: {
@@ -243,7 +243,13 @@ export const T = {
       fr: 'Ce bouton ouvre votre application mail avec le message déjà rédigé — rien n’est stocké sur ce site.',
     },
     reply: { en: 'Or write directly to', fr: 'Ou écrivez directement à' },
-    availability: { en: 'Available from Q1 2027 · relocation to Canada supported', fr: 'Disponible au premier trimestre 2027 · relocalisation au Canada soutenue' },
+    availability: {
+      // No date is promised: the timing depends on a designated-employer offer,
+      // which cannot be scheduled. Say what is true — the programmes and the
+      // profile — rather than a date that would not survive the first call.
+      en: 'Targeting designated-employer communities where art direction and web development are both on the published priority list.',
+      fr: 'Ciblage des collectivités à employeur désigné où la direction artistique et le développement web figurent tous deux sur la liste des métiers prioritaires.',
+    },
   },
   footer: {
     tagline: {
