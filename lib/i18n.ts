@@ -192,8 +192,8 @@ export const T = {
     back: { en: 'Back to the site', fr: 'Retour au site' },
     profile: { en: 'Profile', fr: 'Profil' },
     profileText: {
-      en: 'Graphic designer with 10 years of experience in brand identity, art direction and campaign design, now designing and building web products end to end. Comfortable owning a project from art direction to production CSS, and using AI tools where they measurably speed up production.',
-      fr: 'Graphic designer avec 10 ans d’expérience en identité de marque, direction artistique et design de campagne, qui dessine et construit désormais des produits web de bout en bout. À l’aise pour porter un projet de la direction artistique au CSS de production, et pour utiliser les outils d’IA là où ils accélèrent réellement la production.',
+      en: 'Graphic designer and art director with 10 years of practice in brand identity, packaging, campaign design and game interfaces. I design websites and build them myself where the project calls for it — two are live — and I use AI tools where they measurably speed up production.',
+      fr: 'Graphiste et directeur artistique, dix ans de pratique en identité de marque, packaging, design de campagne et interfaces de jeux. Je conçois des sites et je les construis moi-même quand le projet l’exige — deux sont en ligne — et j’utilise les outils d’IA là où ils accélèrent réellement la production.',
     },
     selected: { en: 'Selected projects', fr: 'Projets sélectionnés' },
     languages: { en: 'Languages', fr: 'Langues' },
