@@ -37,7 +37,7 @@ export default function ContactPage() {
             <p className="lead" style={{ marginTop: '1.25rem' }}>
               {c.lead[lang]}
             </p>
-            <div className="availability" style={{ marginTop: '1.5rem', width: 'fit-content' }}>
+            <div className="availability" style={{ marginTop: '1.5rem' }}>
               <span className="dot-live" aria-hidden />
               {c.availability[lang]}
             </div>

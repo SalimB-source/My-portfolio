@@ -17,7 +17,7 @@ export const T = {
     langLabel: { en: 'Switch language', fr: 'Changer de langue' },
   },
   hero: {
-    eyebrow: { en: 'Algiers · seeking a role in Canada', fr: 'Alger · en recherche d’un poste au Canada' },
+    eyebrow: { en: 'Algiers · seeking a role in Atlantic Canada', fr: 'Alger · en recherche d’un poste au Canada atlantique' },
     titleA: { en: 'I design brands,', fr: 'Je dessine des marques,' },
     titleB: { en: 'then I build them', fr: 'puis je les construis' },
     titleC: { en: 'for the web.', fr: 'pour le web.' },
@@ -203,8 +203,8 @@ export const T = {
     },
     eligibility: { en: 'Eligibility', fr: 'Éligibilité' },
     eligibilityText: {
-      en: 'Algerian citizen. Targeting the Atlantic Immigration Program and the Francophone Community Immigration Pilot — both employer-driven, both requiring an offer from a designated employer. French native, English professional; art direction and front-end development both on several published priority lists.',
-      fr: 'Citoyen algérien. Ciblage du Programme d’immigration au Canada atlantique et du Volet des collectivités francophones — tous deux pilotés par l’employeur et exigeant une offre d’un employeur désigné. Français langue maternelle, anglais professionnel ; direction artistique et développement front-end figurent sur plusieurs listes de métiers prioritaires publiées.',
+      en: 'Algerian citizen. Targeting Atlantic Canada through the Atlantic Immigration Program and the Francophone Community Immigration Pilot — both employer-driven, both requiring an offer from a designated employer. Ten years of salaried employment, so the 1,560-hour requirement is met with documented experience. French native — schooled and university-educated in French — English professional.',
+      fr: 'Citoyen algérien. Ciblage du Canada atlantique via le Programme d’immigration au Canada atlantique et le Volet des collectivités francophones — tous deux pilotés par l’employeur et exigeant une offre d’un employeur désigné. Dix ans d’emploi salarié : l’exigence de 1 560 heures est couverte par une expérience documentée. Français langue maternelle — scolarité et études universitaires en français — anglais professionnel.',
     },
   },
   contact: {
@@ -247,8 +247,8 @@ export const T = {
       // No date is promised: the timing depends on a designated-employer offer,
       // which cannot be scheduled. Say what is true — the programmes and the
       // profile — rather than a date that would not survive the first call.
-      en: 'Targeting designated-employer communities where art direction and web development are both on the published priority list.',
-      fr: 'Ciblage des collectivités à employeur désigné où la direction artistique et le développement web figurent tous deux sur la liste des métiers prioritaires.',
+      en: 'Targeting Atlantic Canada — Nova Scotia and New Brunswick — through the Atlantic Immigration Program and the Francophone Community Immigration Pilot.',
+      fr: 'Ciblage du Canada atlantique — Nouvelle-Écosse et Nouveau-Brunswick — via le Programme d’immigration au Canada atlantique et le Volet des collectivités francophones.',
     },
   },
   footer: {
