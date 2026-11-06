@@ -69,7 +69,7 @@ export function FeaturedWork() {
   const projects = featuredProjects();
 
   return (
-    <section className="section" id="work">
+    <section className="section" id="portfolio">
       <div className="container">
         <SectionHead
           eyebrow={T.featured.eyebrow[lang]}
@@ -77,7 +77,7 @@ export function FeaturedWork() {
           accent={T.featured.titleAccent[lang]}
           lead={T.featured.lead[lang]}
           side={
-            <Link href="/work" className="link-arrow">
+            <Link href="/portfolio" className="link-arrow">
               {T.featured.all[lang]}
               <ArrowUpRight />
             </Link>

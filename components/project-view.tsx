@@ -58,7 +58,7 @@ export function ProjectView({ project, next }: { project: Project; next: Project
       <header className="project-hero">
         <div className="container">
           <nav className="crumbs" aria-label="Breadcrumb">
-            <Link href="/work">{T.project.all[lang]}</Link>
+            <Link href="/portfolio">{T.project.all[lang]}</Link>
             <span aria-hidden>/</span>
             <span>{project.title}</span>
           </nav>
@@ -390,7 +390,7 @@ export function ProjectView({ project, next }: { project: Project; next: Project
                 {next.summary[lang]}
               </p>
             </div>
-            <Link href={`/work/${next.slug}`} className="btn btn--brand">
+            <Link href={`/portfolio/${next.slug}`} className="btn btn--brand">
               {T.project.next[lang]}
               <ArrowUpRight />
             </Link>

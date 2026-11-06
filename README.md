@@ -13,12 +13,19 @@ Vercel or any Node host.
 
 | Route | What it does |
 | --- | --- |
-| `/` | Hero, selected work (7 projects), capabilities, method, clients, principles, CTA |
-| `/work` | All 9 projects with a discipline filter |
-| `/work/[slug]` | Project case page: brief, approach, quote, gallery, at-a-glance facts, next project |
+| `/` | Hero, *Who am I?*, *What I do* (4 services), selected portfolio, *My skills*, clients, *Get in touch* |
 | `/about` | Portrait, long-form story, timeline, tools, principles, contact |
+| `/services` | The four services in depth — deliverables, proof, four-step process, tools |
+| `/portfolio` | All 9 projects with a discipline filter |
+| `/portfolio/[slug]` | Project case page: brief, approach, quote, gallery, at-a-glance facts, next project |
 | `/cv` | One-page printable CV — the *Print / save as PDF* button produces a clean A4 |
 | `/contact` | Contact details plus a message form that composes a `mailto:` (nothing is stored) |
+
+The navigation is exactly five entries — Accueil / À propos / Services / Portfolio /
+Contact — with the CV kept as a secondary entry in the footer and the mobile sheet.
+The old `/work` and `/work/[slug]` URLs 308-redirect to `/portfolio` on any server
+host (a static export has no redirect layer, so the Pages build simply links to the
+new paths).
 
 Also generated: `sitemap.xml`, `robots.txt`, a web app manifest, `icon.svg`, and an
 `og-default.jpg` social card.
@@ -36,7 +43,29 @@ Copy lives in two places:
 
 `<html lang>` is updated on every switch, so screen readers and hyphenation follow.
 
+## One page per job
+
+Each page has a single responsibility, and the copy lives with the page that shows
+it rather than in one giant home page:
+
+- **Home** answers *who is this, can they help me, where do I look next*. Every band
+  ends in a link to the page that goes deeper.
+- **About** answers *who are they, really* — story, timeline, tools, principles.
+- **Services** answers *what can I buy* — scope, deliverables, proof, process.
+- **Portfolio** answers *show me* — the filterable index, then one documented case
+  page per project.
+- **Contact** answers *how do I reach them* — details plus a form that composes a
+  `mailto:`.
+
+Sections are shared components (`components/services.tsx` for the home/service bands,
+`components/sections.tsx` for the editorial ones), so a band can move between pages
+without being rewritten.
+
 ## Content is data, not markup
+
+The four services, the six skill levels and the three *Who am I?* statements live in
+`SERVICES`, `SKILL_LEVELS` and `WHO_AM_I` (same file). The home band, the `/services`
+page and the schema.org block all read from those arrays.
 
 Adding a project means adding one object to `PROJECTS` in `content/site.ts`. The work
 index, the filter counts, the “next project” link, the CV's selected-work block and

@@ -21,21 +21,21 @@ const SLIDES: Slide[] = [
     alt: 'Le Sablier de Bab El — desert citadel key art',
     title: { en: 'Le Sablier de Bab El', fr: 'Le Sablier de Bab El' },
     meta: { en: 'Game art · 422 cards', fr: 'Game art · 422 cartes' },
-    href: '/work/sablier-de-bab-el',
+    href: '/portfolio/sablier-de-bab-el',
   },
   {
     src: '/images/work/letsplay-by-algerie-telecom.jpg',
     alt: "Let's Play by Algérie Télécom campaign visual",
     title: { en: "Let's Play × Algérie Télécom", fr: "Let's Play × Algérie Télécom" },
     meta: { en: 'Campaign identity', fr: 'Identité de campagne' },
-    href: '/work/lets-play-telecom',
+    href: '/portfolio/lets-play-telecom',
   },
   {
     src: '/images/vice-city/keyart.jpg',
     alt: 'Vice City Rush key art',
     title: { en: 'Vice City Rush', fr: 'Vice City Rush' },
     meta: { en: 'Racing game · 8 routes', fr: 'Jeu de course · 8 tracés' },
-    href: '/work/vice-city-rush',
+    href: '/portfolio/vice-city-rush',
   },
 ];
 

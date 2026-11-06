@@ -42,6 +42,20 @@ const nextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
 
+  // The old /work URLs predate the multipage split; keep them alive.
+  // Redirects are unavailable in a static export, so the GitHub Pages build
+  // relies on the pages being linked with the new paths only.
+  ...(isPages
+    ? {}
+    : {
+        async redirects() {
+          return [
+            { source: '/work', destination: '/portfolio', permanent: true },
+            { source: '/work/:slug', destination: '/portfolio/:slug', permanent: true },
+          ];
+        },
+      }),
+
   // Custom headers need a server; static exports do not support them.
   ...(isPages
     ? {}

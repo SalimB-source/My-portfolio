@@ -25,7 +25,7 @@ export function ProjectCard({
   return (
     <Link
       ref={ref}
-      href={`/work/${project.slug}`}
+      href={`/portfolio/${project.slug}`}
       className={`card reveal ${sizeClass}`.trim()}
       aria-label={`${project.title} — ${project.role[lang]}`}
     >

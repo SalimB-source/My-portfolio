@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import { useLang } from './../providers';
 import { T } from '@/lib/i18n';
-import { WorkIndex } from '@/components/work-index';
+import { PortfolioIndex } from '@/components/portfolio-index';
 import { CtaBand, DisciplineMarquee } from '@/components/sections';
 import { Reveal } from '@/components/reveal';
 
-export default function WorkPage() {
+export default function PortfolioView() {
   const { lang } = useLang();
 
   return (
@@ -15,17 +15,17 @@ export default function WorkPage() {
       <section className="page-hero">
         <div className="container">
           <nav className="crumbs" aria-label="Breadcrumb">
-            <Link href="/">Home</Link>
+            <Link href="/">{T.nav.home[lang]}</Link>
             <span aria-hidden>/</span>
-            <span>{T.work.eyebrow[lang]}</span>
+            <span>{T.portfolio.eyebrow[lang]}</span>
           </nav>
           <Reveal>
-            <span className="eyebrow">{T.work.eyebrow[lang]}</span>
+            <span className="eyebrow">{T.portfolio.eyebrow[lang]}</span>
             <h1 className="page-hero__title" style={{ marginTop: '1rem' }}>
-              {T.work.title[lang]} <em className="accent">{T.work.titleAccent[lang]}</em>
+              {T.portfolio.title[lang]} <em className="accent">{T.portfolio.titleAccent[lang]}</em>
             </h1>
             <p className="lead" style={{ marginTop: '1.25rem' }}>
-              {T.work.lead[lang]}
+              {T.portfolio.lead[lang]}
             </p>
           </Reveal>
         </div>
@@ -33,7 +33,7 @@ export default function WorkPage() {
 
       <section className="section section--flush">
         <div className="container">
-          <WorkIndex />
+          <PortfolioIndex />
         </div>
       </section>
 
