@@ -5,8 +5,10 @@ export const LANGS: Lang[] = ['en', 'fr'];
 /** UI strings. Long-form content lives in content/site.ts, keyed by language. */
 export const T = {
   nav: {
-    work: { en: 'Work', fr: 'Projets' },
+    home: { en: 'Home', fr: 'Accueil' },
     about: { en: 'About', fr: 'À propos' },
+    services: { en: 'Services', fr: 'Services' },
+    portfolio: { en: 'Portfolio', fr: 'Portfolio' },
     cv: { en: 'CV', fr: 'CV' },
     contact: { en: 'Contact', fr: 'Contact' },
   },
@@ -50,8 +52,73 @@ export const T = {
     { en: 'Motion', fr: 'Motion' },
     { en: 'Print & signage', fr: 'Print & signalétique' },
   ],
+  home: {
+    who: {
+      eyebrow: { en: 'Who am I?', fr: 'Qui suis-je ?' },
+      title: { en: 'A designer who has spent ten years learning what', fr: 'Un designer qui a passé dix ans à apprendre ce qui' },
+      titleAccent: { en: 'survives', fr: 'survit' },
+      lead: {
+        en: 'Not a list of software. A short account of what I do, for whom, and how the work leaves the studio in a state someone else can use.',
+        fr: 'Pas une liste de logiciels. Un récit court de ce que je fais, pour qui, et comment le travail sort du studio dans un état utilisable par d’autres.',
+      },
+      more: { en: 'The full story', fr: 'L’histoire complète' },
+      infoLabel: { en: 'At a glance', fr: 'En bref' },
+    },
+    what: {
+      eyebrow: { en: 'What I do', fr: 'Ce que je fais' },
+      title: { en: 'Four services, one', fr: 'Quatre services, une' },
+      titleAccent: { en: 'standard', fr: 'exigence' },
+      lead: {
+        en: 'Brand and print, interfaces, video and motion. They are separate services because clients buy them separately — but they are designed to be used together.',
+        fr: 'Marque et print, interfaces, vidéo et motion. Ce sont des services distincts parce que les clients les achètent séparément — mais ils sont pensés pour fonctionner ensemble.',
+      },
+      all: { en: 'All services', fr: 'Tous les services' },
+      deliverables: { en: 'Deliverables', fr: 'Livrables' },
+      proof: { en: 'Seen in', fr: 'Visible dans' },
+    },
+    skills: {
+      eyebrow: { en: 'My skills', fr: 'Mes compétences' },
+      title: { en: 'Ten years, measured in', fr: 'Dix ans, mesurés en' },
+      titleAccent: { en: 'practice', fr: 'pratique' },
+      lead: {
+        en: 'Self-assessed, and kept honest by the projects on this site. The bars say how fluent I am, not how much I like a tool.',
+        fr: 'Auto-évaluées, et tenues honnêtes par les projets de ce site. Les barres disent mon aisance, pas mon attachement à un logiciel.',
+      },
+      tools: { en: 'Tools I use daily', fr: 'Outils du quotidien' },
+    },
+    touch: {
+      eyebrow: { en: 'Get in touch', fr: 'Me contacter' },
+      title: { en: 'A brief, a role, a', fr: 'Un brief, un poste, une' },
+      titleAccent: { en: 'question', fr: 'question' },
+      lead: {
+        en: 'Based in Algiers, working in French, Arabic and English. I answer every message — usually the same day.',
+        fr: 'Basé à Alger, je travaille en français, en arabe et en anglais. Je réponds à chaque message — souvent le jour même.',
+      },
+    },
+  },
+  services: {
+    eyebrow: { en: 'Services', fr: 'Services' },
+    title: { en: 'Four ways to work', fr: 'Quatre façons de travailler' },
+    titleAccent: { en: 'together', fr: 'ensemble' },
+    lead: {
+      en: 'Graphic design, UX/UI, video editing and motion design. Each service is a scope with deliverables you can hold me to — and each one is priced from a written brief, never from a mood board.',
+      fr: 'Design graphique, UX/UI, montage vidéo et motion design. Chaque service est un périmètre avec des livrables sur lesquels m’engager — et chacun se chiffre à partir d’un brief écrit, jamais d’une planche d’ambiance.',
+    },
+    deliverables: { en: 'What you get', fr: 'Ce que vous recevez' },
+    proof: { en: 'Seen in', fr: 'Visible dans' },
+    process: { en: 'How it runs', fr: 'Comment ça se passe' },
+    processTitle: { en: 'Four steps, whatever the', fr: 'Quatre étapes, quel que soit le' },
+    processAccent: { en: 'format', fr: 'format' },
+    processLead: {
+      en: 'The same four steps for a poster and for a platform. Only the length changes.',
+      fr: 'Les mêmes quatre étapes pour une affiche et pour une plateforme. Seule la durée change.',
+    },
+    skills: { en: 'Tools of the trade', fr: 'Outils du métier' },
+    cta: { en: 'Start a project', fr: 'Démarrer un projet' },
+    back: { en: 'Back to the portfolio', fr: 'Retour au portfolio' },
+  },
   featured: {
-    eyebrow: { en: 'Selected work', fr: 'Projets sélectionnés' },
+    eyebrow: { en: 'My portfolio', fr: 'Mon portfolio' },
     title: { en: 'Seven projects, one', fr: 'Sept projets, une' },
     titleAccent: { en: 'standard', fr: 'exigence' },
     lead: {
@@ -101,8 +168,8 @@ export const T = {
     primary: { en: 'Start a conversation', fr: 'Commencer la conversation' },
     secondary: { en: 'Download the CV', fr: 'Télécharger le CV' },
   },
-  work: {
-    eyebrow: { en: 'Projects', fr: 'Projets' },
+  portfolio: {
+    eyebrow: { en: 'Portfolio', fr: 'Portfolio' },
     title: { en: 'Everything, with the', fr: 'Tout, avec les' },
     titleAccent: { en: 'receipts', fr: 'preuves' },
     lead: {
@@ -148,7 +215,7 @@ export const T = {
     },
     gameCreatures: { en: 'creatures', fr: 'créatures' },
     all: { en: 'All projects', fr: 'Tous les projets' },
-    back: { en: 'Back to work', fr: 'Retour aux projets' },
+    back: { en: 'Back to the portfolio', fr: 'Retour au portfolio' },
     more: { en: 'More work', fr: 'Autres projets' },
   },
   about: {

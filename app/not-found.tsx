@@ -19,7 +19,7 @@ export default function NotFound() {
         <p className="lead" style={{ margin: '0 auto 2rem' }}>
           {T.notFound.lead[lang]}
         </p>
-        <Link href="/work" className="btn btn--brand">
+        <Link href="/portfolio" className="btn btn--brand">
           {T.notFound.cta[lang]}
           <ArrowUpRight />
         </Link>

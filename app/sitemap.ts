@@ -5,7 +5,7 @@ import { PROJECTS, SITE } from '@/content/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const pages = ['', '/work', '/about', '/cv', '/contact'].map((path) => ({
+  const pages = ['', '/about', '/services', '/portfolio', '/cv', '/contact'].map((path) => ({
     url: `${SITE.siteUrl}${path}`,
     lastModified: now,
     changeFrequency: 'monthly' as const,
@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const projects = PROJECTS.map((p) => ({
-    url: `${SITE.siteUrl}/work/${p.slug}`,
+    url: `${SITE.siteUrl}/portfolio/${p.slug}`,
     lastModified: now,
     changeFrequency: 'yearly' as const,
     priority: 0.7,

@@ -1547,3 +1547,170 @@ export const LOGOS: { name: string; src: string; plate: 'light' | 'dark'; h?: nu
   { name: 'Iris Studio', src: '/images/logos/iris-studio.svg', plate: 'dark' },
   { name: 'EGOR', src: '/images/logos/egor.svg', plate: 'light', h: 30 },
 ];
+
+/* ------------------------------------------------------------------ */
+/* SERVICES                                                            */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The four services, in the order they appear on the home page and on
+ * /services. Each one carries the same four fields so the page can render a
+ * single component instead of four bespoke blocks.
+ */
+export type Service = {
+  id: string;
+  /** Icon id resolved in components/service-icon.tsx */
+  icon: 'graphic' | 'ux' | 'video' | 'motion';
+  title: { en: string; fr: string };
+  /** One line, home page card. */
+  tagline: { en: string; fr: string };
+  /** Two or three sentences, /services page. */
+  text: { en: string; fr: string };
+  /** What the client actually receives. */
+  deliverables: { en: string[]; fr: string[] };
+  /** Honest examples, drawn from the projects in this portfolio. */
+  proof: { en: string; fr: string };
+};
+
+export const SERVICES: Service[] = [
+  {
+    id: 'graphic-design',
+    icon: 'graphic',
+    title: { en: 'Graphic design', fr: 'Design graphique' },
+    tagline: {
+      en: 'Identities, campaigns and print that hold up outside the studio.',
+      fr: 'Identités, campagnes et print qui tiennent hors du studio.',
+    },
+    text: {
+      en: 'Logos, lock-ups, type and colour scales, posters, packaging and signage. I build systems rather than one-offs, so the twentieth application still looks like the first — whether it lands on a phone thumbnail or a six-metre banner.',
+      fr: 'Logos, lock-ups, échelles typographiques et chromatiques, affiches, packaging et signalétique. Je construis des systèmes plutôt que des pièces uniques, pour que la vingtième application ressemble encore à la première — de la vignette téléphone à la bâche de six mètres.',
+    },
+    deliverables: {
+      en: ['Logo & lock-up system', 'Type and colour scales', 'Print, packaging, signage', 'Brand guidelines'],
+      fr: ['Logo & système de lock-up', 'Échelles typo et couleur', 'Print, packaging, signalétique', 'Charte de marque'],
+    },
+    proof: {
+      en: 'Let’s Play × Algérie Télécom, 7ouma Arena × Djezzy, Iris Studio',
+      fr: 'Let’s Play × Algérie Télécom, 7ouma Arena × Djezzy, Iris Studio',
+    },
+  },
+  {
+    id: 'ux-design',
+    icon: 'ux',
+    title: { en: 'UX / UI design', fr: 'Design UX / UI' },
+    tagline: {
+      en: 'Interfaces designed around the first five seconds.',
+      fr: 'Des interfaces pensées pour les cinq premières secondes.',
+    },
+    text: {
+      en: 'What a user needs to see, in what order, and what can disappear. I work in the real format — 390 px, in the browser, with real data — and hand over tokens and components rather than a picture of a screen.',
+      fr: 'Ce qu’un utilisateur doit voir, dans quel ordre, et ce qui peut disparaître. Je travaille au format réel — 390 px, dans le navigateur, avec de vraies données — et je transmets des tokens et des composants, pas l’image d’un écran.',
+    },
+    deliverables: {
+      en: ['Flows & wireframes', 'Design tokens', 'Component library', 'Prototypes in code'],
+      fr: ['Parcours & wireframes', 'Design tokens', 'Bibliothèque de composants', 'Prototypes en code'],
+    },
+    proof: {
+      en: 'Let’s Play platform, EGOR lobby, Le Sablier duel screen',
+      fr: 'Plateforme Let’s Play, lobby EGOR, écran de duel Le Sablier',
+    },
+  },
+  {
+    id: 'video-editing',
+    icon: 'video',
+    title: { en: 'Video editing', fr: 'Montage vidéo' },
+    tagline: {
+      en: 'Edits cut for the platform they will actually run on.',
+      fr: 'Des montages pensés pour la plateforme qui les diffusera.',
+    },
+    text: {
+      en: 'Post-production for brand films, trailers and social formats: assembly, rhythm, sound, grade and the last five percent that separates a decent edit from a finished one. Delivered in every ratio the campaign needs, from one timeline.',
+      fr: 'Post-production pour films de marque, trailers et formats sociaux : montage, rythme, son, étalonnage et ces cinq derniers pourcents qui séparent un montage correct d’un montage fini. Livré dans tous les ratios de la campagne, depuis une seule timeline.',
+    },
+    deliverables: {
+      en: ['Offline & online edit', 'Sound & grade', 'Motion titling', 'Social cut-downs (9:16, 1:1, 16:9)'],
+      fr: ['Montage offline & online', 'Son & étalonnage', 'Titrages animés', 'Déclinaisons sociales (9:16, 1:1, 16:9)'],
+    },
+    proof: {
+      en: 'Iris Studio campaigns, Let’s Play channels',
+      fr: 'Campagnes Iris Studio, chaînes Let’s Play',
+    },
+  },
+  {
+    id: 'motion-design',
+    icon: 'motion',
+    title: { en: 'Motion design', fr: 'Design de mouvement' },
+    tagline: {
+      en: 'Motion that gives a still brand a pulse.',
+      fr: 'Un mouvement qui donne un pouls à une marque immobile.',
+    },
+    text: {
+      en: 'Logos that resolve, transitions that explain, game UI that reacts. Motion is where a design system proves it has rules — easing, timing and hierarchy all come from the same tokens as the type and the colour.',
+      fr: 'Des logos qui se résolvent, des transitions qui expliquent, une UI de jeu qui réagit. Le mouvement est l’endroit où un design system prouve qu’il a des règles — easing, timings et hiérarchie viennent des mêmes tokens que la typo et la couleur.',
+    },
+    deliverables: {
+      en: ['Animated identities', 'UI motion specs', 'Explainer sequences', 'Game HUD & feedback'],
+      fr: ['Identités animées', 'Specs de motion UI', 'Séquences explicatives', 'HUD & feedback de jeu'],
+    },
+    proof: {
+      en: 'Le Sablier de Bab El, Mirage Rush, Vice City Rush',
+      fr: 'Le Sablier de Bab El, Mirage Rush, Vice City Rush',
+    },
+  },
+];
+
+/** Four steps, used on /services and on the home page method band. */
+export const SERVICE_PROCESS = {
+  en: [
+    { title: 'Brief', text: 'One call, then a one-page brief written back to you: audience, constraints, and the single decision the work has to get right.' },
+    { title: 'Direction', text: 'Two or three routes, each with a reason. We choose one, and I set the rules — type, colour, image, motion — before producing volume.' },
+    { title: 'Production', text: 'Design work in the real format, with real content. Weekly checkpoints, no surprise reveal at the end.' },
+    { title: 'Handover', text: 'Files, tokens, components and a short guide. Your team can extend the work six months later without calling me.' },
+  ],
+  fr: [
+    { title: 'Brief', text: 'Un appel, puis un brief d’une page réécrit pour vous : audience, contraintes, et la décision unique que le travail doit réussir.' },
+    { title: 'Direction', text: 'Deux ou trois pistes, chacune avec une raison. On en choisit une, et je pose les règles — typo, couleur, image, mouvement — avant de produire du volume.' },
+    { title: 'Production', text: 'Le design au format réel, avec du vrai contenu. Points de suivi hebdomadaires, pas de révélation-surprise à la fin.' },
+    { title: 'Transmission', text: 'Fichiers, tokens, composants et un guide court. Votre équipe peut faire évoluer le travail six mois plus tard sans m’appeler.' },
+  ],
+};
+
+/* ------------------------------------------------------------------ */
+/* SKILLS — the level bars shown on the home page and on /about        */
+/* ------------------------------------------------------------------ */
+
+export const SKILL_LEVELS: { label: { en: string; fr: string }; value: number }[] = [
+  { label: { en: 'Adobe Creative Suite', fr: 'Adobe Creative Suite' }, value: 95 },
+  { label: { en: 'UI / UX design', fr: 'Design UI / UX' }, value: 90 },
+  { label: { en: 'Motion design', fr: 'Design de mouvement' }, value: 88 },
+  { label: { en: 'Video editing', fr: 'Montage vidéo' }, value: 92 },
+  { label: { en: 'Brand strategy', fr: 'Stratégie de marque' }, value: 85 },
+  { label: { en: 'Web design & front-end', fr: 'Web design & front-end' }, value: 87 },
+];
+
+/* ------------------------------------------------------------------ */
+/* WHO AM I — three blocks, the site's own words                       */
+/* ------------------------------------------------------------------ */
+
+export const WHO_AM_I = {
+  en: [
+    { icon: 'spark', text: 'I’m Salim Benmokhtar, a creative graphic designer with **10 years of experience** in visual communication.' },
+    { icon: 'layers', text: 'I help brands stand out by turning ideas into powerful visuals that blend **creativity, strategy and precision**.' },
+    { icon: 'globe', text: 'My work spans **graphic design, UX, video editing and motion design**, always aiming at experiences people remember.' },
+  ],
+  fr: [
+    { icon: 'spark', text: 'Je suis Salim Benmokhtar, graphiste créatif avec **10 ans d’expérience** en communication visuelle.' },
+    { icon: 'layers', text: 'J’aide les marques à se démarquer en transformant les idées en visuels forts qui mêlent **créativité, stratégie et précision**.' },
+    { icon: 'globe', text: 'Mon travail couvre le **design graphique, l’UX, le montage vidéo et le motion design**, toujours avec l’objectif d’expériences mémorables.' },
+  ],
+} as const;
+
+/** The three info cards under the intro. */
+export const INFO_CARDS = [
+  { label: { en: 'Location', fr: 'Localisation' }, value: { en: 'Algiers, Algeria', fr: 'Alger, Algérie' } },
+  { label: { en: 'Experience', fr: 'Expérience' }, value: { en: '10+ years', fr: '10+ années' } },
+  {
+    label: { en: 'Specialisation', fr: 'Spécialisation' },
+    value: { en: 'Brand identity & motion design', fr: 'Identité de marque & motion design' },
+  },
+];

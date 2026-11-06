@@ -11,10 +11,12 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   const links = [
-    { href: '/work', label: T.nav.work[lang] },
+    { href: '/', label: T.nav.home[lang] },
     { href: '/about', label: T.nav.about[lang] },
-    { href: '/cv', label: T.nav.cv[lang] },
+    { href: '/services', label: T.nav.services[lang] },
+    { href: '/portfolio', label: T.nav.portfolio[lang] },
     { href: '/contact', label: T.nav.contact[lang] },
+    { href: '/cv', label: T.nav.cv[lang] },
   ];
 
   return (

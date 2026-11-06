@@ -9,10 +9,11 @@ import { SITE } from '@/content/site';
 import { ArrowUpRight } from './icons';
 
 const NAV = [
-  { href: '/work', key: 'work' as const, meta: '01' },
+  { href: '/', key: 'home' as const, meta: '01' },
   { href: '/about', key: 'about' as const, meta: '02' },
-  { href: '/cv', key: 'cv' as const, meta: '03' },
-  { href: '/contact', key: 'contact' as const, meta: '04' },
+  { href: '/services', key: 'services' as const, meta: '03' },
+  { href: '/portfolio', key: 'portfolio' as const, meta: '04' },
+  { href: '/contact', key: 'contact' as const, meta: '05' },
 ];
 
 export function Header() {
@@ -41,7 +42,8 @@ export function Header() {
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/');
 
   return (
     <>
@@ -112,6 +114,10 @@ export function Header() {
               <small>{item.meta}</small>
             </Link>
           ))}
+          <Link href="/cv" className="sheet__link sheet__link--sub">
+            {T.nav.cv[lang]}
+            <small>CV</small>
+          </Link>
           <div className="sheet__foot">
             <div className="sheet__lang">
               <span className="mono">{T.header.langLabel[lang]}</span>

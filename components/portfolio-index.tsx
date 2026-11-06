@@ -6,7 +6,7 @@ import { CATEGORIES, PROJECTS, type Category } from '@/content/site';
 import { T } from '@/lib/i18n';
 import { ProjectCard } from './project-card';
 
-export function WorkIndex() {
+export function PortfolioIndex() {
   const { lang } = useLang();
   const [filter, setFilter] = useState<Category | 'all'>('all');
 
@@ -17,7 +17,7 @@ export function WorkIndex() {
 
   return (
     <>
-      <div className="filters" role="group" aria-label={T.work.filterLabel[lang]}>
+      <div className="filters" role="group" aria-label={T.portfolio.filterLabel[lang]}>
         {CATEGORIES.map((c) => (
           <button
             key={c.id}
@@ -35,12 +35,12 @@ export function WorkIndex() {
           </button>
         ))}
         <span className="mono" style={{ marginLeft: 'auto', alignSelf: 'center' }}>
-          {list.length.toString().padStart(2, '0')} {T.work.count[lang]}
+          {list.length.toString().padStart(2, '0')} {T.portfolio.count[lang]}
         </span>
       </div>
 
       {list.length === 0 ? (
-        <p className="lead">{T.work.empty[lang]}</p>
+        <p className="lead">{T.portfolio.empty[lang]}</p>
       ) : (
         <div className="work-grid" key={filter}>
           {list.map((p, i) => (
